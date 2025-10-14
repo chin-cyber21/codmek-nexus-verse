@@ -30,28 +30,30 @@ const Pod = ({ position, shape, label, onClick, isHovered, onHover }: PodProps) 
   });
 
   const material = (
-    <meshStandardMaterial
+    <meshPhysicalMaterial
       color="#ffffff"
       emissive="#ffffff"
-      emissiveIntensity={isHovered ? 0.3 : 0.1}
+      emissiveIntensity={isHovered ? 0.4 : 0.15}
       transparent
-      opacity={0.15}
+      opacity={0.2}
       wireframe
-      metalness={0.9}
-      roughness={0.1}
+      metalness={1}
+      roughness={0.05}
+      clearcoat={1}
+      clearcoatRoughness={0.1}
     />
   );
 
   const renderShape = () => {
     switch (shape) {
       case "sphere":
-        return <Sphere args={[0.8, 32, 32]}>{material}</Sphere>;
+        return <Sphere args={[0.8, 64, 64]}>{material}</Sphere>;
       case "box":
         return <Box args={[1.2, 1.2, 1.2]}>{material}</Box>;
       case "octahedron":
-        return <Octahedron args={[1]}>{material}</Octahedron>;
+        return <Octahedron args={[1, 2]}>{material}</Octahedron>;
       case "dodecahedron":
-        return <Dodecahedron args={[0.9]}>{material}</Dodecahedron>;
+        return <Dodecahedron args={[0.9, 2]}>{material}</Dodecahedron>;
     }
   };
 
@@ -93,30 +95,35 @@ const CentralLogo = () => {
       
       {/* Wireframe hexagon around logo */}
       <mesh rotation={[0, 0, 0]}>
-        <octahedronGeometry args={[3, 0]} />
-        <meshStandardMaterial
+        <octahedronGeometry args={[3, 1]} />
+        <meshPhysicalMaterial
           color="#ffffff"
           emissive="#ffffff"
-          emissiveIntensity={0.4}
+          emissiveIntensity={0.5}
           wireframe
           transparent
-          opacity={0.3}
+          opacity={0.4}
+          metalness={1}
+          roughness={0}
+          clearcoat={1}
         />
       </mesh>
 
       {/* Inner rotating ring */}
       <mesh rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[2.5, 0.05, 16, 100]} />
-        <meshStandardMaterial
+        <torusGeometry args={[2.5, 0.05, 32, 200]} />
+        <meshPhysicalMaterial
           color="#ffffff"
           emissive="#ffffff"
-          emissiveIntensity={0.6}
+          emissiveIntensity={0.8}
           metalness={1}
           roughness={0}
+          clearcoat={1}
+          reflectivity={1}
         />
       </mesh>
 
-      <pointLight color="#ffffff" intensity={2} distance={15} />
+      <pointLight color="#ffffff" intensity={3} distance={15} decay={2} />
     </group>
   );
 };
@@ -152,12 +159,14 @@ const WireframeNet = () => {
 
   return (
     <mesh ref={meshRef}>
-      <sphereGeometry args={[15, 32, 32]} />
-      <meshStandardMaterial
+      <sphereGeometry args={[15, 64, 64]} />
+      <meshPhysicalMaterial
         color="#ffffff"
         wireframe
         transparent
-        opacity={0.05}
+        opacity={0.08}
+        metalness={1}
+        roughness={0}
       />
     </mesh>
   );
@@ -180,14 +189,44 @@ const Studio3D = ({ onPodClick }: Studio3DProps) => {
 
   return (
     <div className="w-full h-screen">
-      <Canvas camera={{ position: [0, 3, 12], fov: 60 }}>
-        <color attach="background" args={["#050505"]} />
-        <fog attach="fog" args={["#050505", 10, 30]} />
+      <Canvas 
+        camera={{ position: [0, 3, 12], fov: 60 }}
+        gl={{ 
+          antialias: true,
+          alpha: true,
+          powerPreference: "high-performance",
+          toneMapping: THREE.ACESFilmicToneMapping,
+          toneMappingExposure: 1.2,
+        }}
+        shadows
+        dpr={[1, 2]}
+      >
+        <color attach="background" args={["#020202"]} />
+        <fog attach="fog" args={["#020202", 10, 35]} />
 
-        {/* Refined lighting */}
-        <ambientLight intensity={0.2} />
-        <directionalLight position={[10, 10, 5]} intensity={0.5} color="#ffffff" />
-        <pointLight position={[0, 0, 0]} intensity={1.5} color="#ffffff" distance={20} />
+        {/* Enhanced lighting */}
+        <ambientLight intensity={0.3} />
+        <directionalLight 
+          position={[10, 10, 5]} 
+          intensity={0.8} 
+          color="#ffffff"
+          castShadow
+          shadow-mapSize={[2048, 2048]}
+        />
+        <pointLight 
+          position={[0, 0, 0]} 
+          intensity={2} 
+          color="#ffffff" 
+          distance={25}
+          decay={2}
+        />
+        <spotLight
+          position={[0, 10, 0]}
+          angle={0.5}
+          penumbra={1}
+          intensity={1}
+          castShadow
+        />
 
         {/* Central Logo */}
         <CentralLogo />
@@ -209,16 +248,18 @@ const Studio3D = ({ onPodClick }: Studio3DProps) => {
           />
         ))}
 
-        {/* Controls */}
+        {/* Enhanced Controls */}
         <OrbitControls
           enableZoom={true}
           enablePan={false}
           minDistance={8}
           maxDistance={25}
           autoRotate
-          autoRotateSpeed={0.3}
+          autoRotateSpeed={0.25}
           maxPolarAngle={Math.PI / 1.8}
           minPolarAngle={Math.PI / 4}
+          enableDamping
+          dampingFactor={0.05}
         />
       </Canvas>
     </div>

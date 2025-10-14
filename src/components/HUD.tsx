@@ -14,13 +14,13 @@ const HUD = ({ onChatClick, hoveredPod }: HUDProps) => {
       <motion.div
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.5 }}
+        transition={{ delay: 0.5, type: "spring", stiffness: 100 }}
         className="fixed top-0 left-0 right-0 z-20 p-6"
       >
-        <div className="glass-panel rounded-2xl p-4 flex items-center justify-between">
+        <div className="glass-panel rounded-2xl p-5 flex items-center justify-between shadow-2xl border-primary/30">
           <div className="flex items-center gap-4">
-            <h1 className="text-2xl font-bold holographic-text">CODMEK STUDIO</h1>
-            <span className="text-xs px-3 py-1 glass-panel rounded-full text-primary">
+            <h1 className="text-2xl font-bold holographic-text tracking-wider">CODMEK STUDIO</h1>
+            <span className="text-xs px-4 py-1.5 glass-panel rounded-full text-primary font-medium border border-primary/20">
               AI-Native Workspace
             </span>
           </div>
@@ -40,33 +40,33 @@ const HUD = ({ onChatClick, hoveredPod }: HUDProps) => {
       <motion.div
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.5 }}
+        transition={{ delay: 0.5, type: "spring", stiffness: 100 }}
         className="fixed bottom-0 left-0 right-0 z-20 p-6"
       >
         <div className="flex items-end justify-between">
           {/* Instructions */}
-          <div className="glass-panel rounded-2xl p-4 max-w-md">
-            <p className="text-sm text-muted-foreground mb-2">
+          <div className="glass-panel rounded-2xl p-5 max-w-md shadow-2xl border-primary/30">
+            <p className="text-sm text-muted-foreground mb-2 font-medium">
               <strong className="text-primary">Click & Drag</strong> to explore • <strong className="text-primary">Scroll</strong> to zoom
             </p>
             {hoveredPod && (
               <motion.p
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-sm text-primary font-medium"
+                className="text-sm text-primary font-semibold tracking-wide"
               >
                 Hovering: {hoveredPod} Pod
               </motion.p>
             )}
           </div>
 
-          {/* Chat Button */}
+          {/* Chat Button - Enhanced HD version */}
           <Button
             onClick={onChatClick}
-            className="glass-panel rounded-full px-8 py-6 glow-white hover:scale-105 transition-all duration-300 border-primary/30"
+            className="glass-panel rounded-full px-10 py-7 glow-white hover:scale-105 transition-all duration-500 border-primary/40 shadow-2xl"
           >
-            <MessageCircle className="h-6 w-6 mr-2" />
-            <span className="font-medium">Talk to AI Guide</span>
+            <MessageCircle className="h-6 w-6 mr-3 drop-shadow-lg" strokeWidth={2.5} />
+            <span className="font-semibold text-base tracking-wide">Talk to AI Guide</span>
           </Button>
         </div>
       </motion.div>
