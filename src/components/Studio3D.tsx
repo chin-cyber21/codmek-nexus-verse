@@ -1,56 +1,62 @@
 import { useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Float, Text3D, Center, Sphere, Box, Torus } from "@react-three/drei";
+import { Canvas, useFrame, useLoader } from "@react-three/fiber";
+import { OrbitControls, Float, Sphere, Box, Octahedron, Dodecahedron } from "@react-three/drei";
 import * as THREE from "three";
+import { TextureLoader } from "three";
+import codmekLogo from "@/assets/codmek-logo.png";
 
 interface PodProps {
   position: [number, number, number];
-  color: string;
-  shape: "sphere" | "box" | "torus";
+  shape: "sphere" | "box" | "octahedron" | "dodecahedron";
   label: string;
   onClick: () => void;
   isHovered: boolean;
   onHover: (hovered: boolean) => void;
 }
 
-const Pod = ({ position, color, shape, label, onClick, isHovered, onHover }: PodProps) => {
+const Pod = ({ position, shape, label, onClick, isHovered, onHover }: PodProps) => {
   const meshRef = useRef<THREE.Mesh>(null);
 
   useFrame((state) => {
     if (meshRef.current) {
-      meshRef.current.rotation.y += 0.005;
+      meshRef.current.rotation.y += 0.003;
+      meshRef.current.rotation.x += 0.001;
       if (isHovered) {
-        meshRef.current.scale.lerp(new THREE.Vector3(1.2, 1.2, 1.2), 0.1);
+        meshRef.current.scale.lerp(new THREE.Vector3(1.15, 1.15, 1.15), 0.1);
       } else {
         meshRef.current.scale.lerp(new THREE.Vector3(1, 1, 1), 0.1);
       }
     }
   });
 
-  const renderShape = () => {
-    const material = (
-      <meshStandardMaterial
-        color={color}
-        emissive={color}
-        emissiveIntensity={isHovered ? 0.5 : 0.2}
-        transparent
-        opacity={0.8}
-        wireframe={false}
-      />
-    );
+  const material = (
+    <meshStandardMaterial
+      color="#ffffff"
+      emissive="#ffffff"
+      emissiveIntensity={isHovered ? 0.3 : 0.1}
+      transparent
+      opacity={0.15}
+      wireframe
+      metalness={0.9}
+      roughness={0.1}
+    />
+  );
 
+  const renderShape = () => {
     switch (shape) {
       case "sphere":
-        return <Sphere args={[1, 32, 32]}>{material}</Sphere>;
+        return <Sphere args={[0.8, 32, 32]}>{material}</Sphere>;
       case "box":
-        return <Box args={[1.5, 1.5, 1.5]}>{material}</Box>;
-      case "torus":
-        return <Torus args={[1, 0.4, 16, 32]}>{material}</Torus>;
+        return <Box args={[1.2, 1.2, 1.2]}>{material}</Box>;
+      case "octahedron":
+        return <Octahedron args={[1]}>{material}</Octahedron>;
+      case "dodecahedron":
+        return <Dodecahedron args={[0.9]}>{material}</Dodecahedron>;
     }
   };
 
   return (
-    <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
+    <Float speed={1.5} rotationIntensity={0.3} floatIntensity={0.4}>
       <group position={position}>
         <mesh
           ref={meshRef}
@@ -60,9 +66,7 @@ const Pod = ({ position, color, shape, label, onClick, isHovered, onHover }: Pod
         >
           {renderShape()}
         </mesh>
-        
-        {/* Glow effect */}
-        <pointLight color={color} intensity={isHovered ? 2 : 1} distance={5} />
+        <pointLight color="#ffffff" intensity={isHovered ? 1.5 : 0.5} distance={5} />
       </group>
     </Float>
   );
@@ -70,68 +74,92 @@ const Pod = ({ position, color, shape, label, onClick, isHovered, onHover }: Pod
 
 const CentralLogo = () => {
   const groupRef = useRef<THREE.Group>(null);
+  const texture = useLoader(TextureLoader, codmekLogo);
 
   useFrame((state) => {
     if (groupRef.current) {
-      groupRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.2;
+      groupRef.current.rotation.y += 0.002;
+      groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.2;
     }
   });
 
   return (
-    <group ref={groupRef} position={[0, 2, 0]}>
+    <group ref={groupRef} position={[0, 0, 0]}>
+      {/* Logo plane with actual Codmek logo */}
       <mesh>
-        <torusGeometry args={[2, 0.1, 16, 100]} />
+        <planeGeometry args={[4, 4]} />
+        <meshBasicMaterial map={texture} transparent opacity={0.95} />
+      </mesh>
+      
+      {/* Wireframe hexagon around logo */}
+      <mesh rotation={[0, 0, 0]}>
+        <octahedronGeometry args={[3, 0]} />
         <meshStandardMaterial
-          color="#00f0ff"
-          emissive="#00f0ff"
-          emissiveIntensity={0.8}
+          color="#ffffff"
+          emissive="#ffffff"
+          emissiveIntensity={0.4}
+          wireframe
+          transparent
+          opacity={0.3}
+        />
+      </mesh>
+
+      {/* Inner rotating ring */}
+      <mesh rotation={[Math.PI / 2, 0, 0]}>
+        <torusGeometry args={[2.5, 0.05, 16, 100]} />
+        <meshStandardMaterial
+          color="#ffffff"
+          emissive="#ffffff"
+          emissiveIntensity={0.6}
           metalness={1}
           roughness={0}
         />
       </mesh>
-      <mesh position={[0, 0, 0]}>
-        <sphereGeometry args={[0.5, 32, 32]} />
-        <meshStandardMaterial
-          color="#8b5cf6"
-          emissive="#8b5cf6"
-          emissiveIntensity={0.8}
-          metalness={1}
-          roughness={0}
-        />
-      </mesh>
-      <pointLight color="#00f0ff" intensity={3} distance={10} />
+
+      <pointLight color="#ffffff" intensity={2} distance={15} />
     </group>
   );
 };
 
-const Particles = () => {
-  const particlesRef = useRef<THREE.Points>(null);
-  const particleCount = 100;
-
-  const positions = new Float32Array(particleCount * 3);
-  for (let i = 0; i < particleCount * 3; i++) {
-    positions[i] = (Math.random() - 0.5) * 20;
-  }
+const AnimatedGrid = () => {
+  const gridRef = useRef<THREE.GridHelper>(null);
 
   useFrame((state) => {
-    if (particlesRef.current) {
-      particlesRef.current.rotation.y += 0.001;
-      particlesRef.current.rotation.x += 0.0005;
+    if (gridRef.current) {
+      gridRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.5 - 5;
+      gridRef.current.rotation.y += 0.001;
     }
   });
 
   return (
-    <points ref={particlesRef}>
-      <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          count={particleCount}
-          array={positions}
-          itemSize={3}
-        />
-      </bufferGeometry>
-      <pointsMaterial size={0.05} color="#00f0ff" transparent opacity={0.6} />
-    </points>
+    <gridHelper
+      ref={gridRef}
+      args={[50, 50, "#ffffff", "#333333"]}
+      position={[0, -5, 0]}
+    />
+  );
+};
+
+const WireframeNet = () => {
+  const meshRef = useRef<THREE.Mesh>(null);
+
+  useFrame((state) => {
+    if (meshRef.current) {
+      meshRef.current.rotation.x = state.clock.elapsedTime * 0.1;
+      meshRef.current.rotation.y = state.clock.elapsedTime * 0.15;
+    }
+  });
+
+  return (
+    <mesh ref={meshRef}>
+      <sphereGeometry args={[15, 32, 32]} />
+      <meshStandardMaterial
+        color="#ffffff"
+        wireframe
+        transparent
+        opacity={0.05}
+      />
+    </mesh>
   );
 };
 
@@ -143,30 +171,36 @@ const Studio3D = ({ onPodClick }: Studio3DProps) => {
   const [hoveredPod, setHoveredPod] = useState<string | null>(null);
 
   const pods = [
-    { name: "Reception", position: [-4, 0, 2] as [number, number, number], color: "#00f0ff", shape: "sphere" as const },
-    { name: "Research", position: [4, 1, 0] as [number, number, number], color: "#8b5cf6", shape: "sphere" as const },
-    { name: "Workshop", position: [0, -1, 4] as [number, number, number], color: "#00ff88", shape: "box" as const },
-    { name: "Nexus", position: [-3, 1, -3] as [number, number, number], color: "#ff00ff", shape: "torus" as const },
-    { name: "Learn", position: [3, 0, -4] as [number, number, number], color: "#ffaa00", shape: "box" as const },
+    { name: "Reception", position: [-5, 0, 2] as [number, number, number], shape: "octahedron" as const },
+    { name: "Research", position: [5, 1, 0] as [number, number, number], shape: "dodecahedron" as const },
+    { name: "Workshop", position: [0, -1, 5] as [number, number, number], shape: "box" as const },
+    { name: "Nexus", position: [-4, 1, -4] as [number, number, number], shape: "sphere" as const },
+    { name: "Learn", position: [4, 0, -5] as [number, number, number], shape: "octahedron" as const },
   ];
 
   return (
     <div className="w-full h-screen">
-      <Canvas camera={{ position: [0, 5, 10], fov: 60 }}>
-        {/* Lighting */}
-        <ambientLight intensity={0.3} />
-        <directionalLight position={[10, 10, 5]} intensity={1} />
-        <pointLight position={[0, 5, 0]} intensity={1} color="#00f0ff" />
+      <Canvas camera={{ position: [0, 3, 12], fov: 60 }}>
+        <color attach="background" args={["#050505"]} />
+        <fog attach="fog" args={["#050505", 10, 30]} />
+
+        {/* Refined lighting */}
+        <ambientLight intensity={0.2} />
+        <directionalLight position={[10, 10, 5]} intensity={0.5} color="#ffffff" />
+        <pointLight position={[0, 0, 0]} intensity={1.5} color="#ffffff" distance={20} />
 
         {/* Central Logo */}
         <CentralLogo />
+
+        {/* Wireframe environments */}
+        <WireframeNet />
+        <AnimatedGrid />
 
         {/* Interactive Pods */}
         {pods.map((pod) => (
           <Pod
             key={pod.name}
             position={pod.position}
-            color={pod.color}
             shape={pod.shape}
             label={pod.name}
             onClick={() => onPodClick(pod.name)}
@@ -175,17 +209,16 @@ const Studio3D = ({ onPodClick }: Studio3DProps) => {
           />
         ))}
 
-        {/* Particles */}
-        <Particles />
-
         {/* Controls */}
         <OrbitControls
           enableZoom={true}
           enablePan={false}
           minDistance={8}
-          maxDistance={20}
+          maxDistance={25}
           autoRotate
-          autoRotateSpeed={0.5}
+          autoRotateSpeed={0.3}
+          maxPolarAngle={Math.PI / 1.8}
+          minPolarAngle={Math.PI / 4}
         />
       </Canvas>
     </div>

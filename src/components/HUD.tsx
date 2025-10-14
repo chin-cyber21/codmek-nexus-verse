@@ -63,7 +63,7 @@ const HUD = ({ onChatClick, hoveredPod }: HUDProps) => {
           {/* Chat Button */}
           <Button
             onClick={onChatClick}
-            className="glass-panel rounded-full p-6 glow-cyan hover:scale-110 transition-transform"
+            className="glass-panel rounded-full px-8 py-6 glow-white hover:scale-105 transition-all duration-300 border-primary/30"
           >
             <MessageCircle className="h-6 w-6 mr-2" />
             <span className="font-medium">Talk to AI Guide</span>

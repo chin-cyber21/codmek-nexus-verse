@@ -50,10 +50,11 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        holographic: {
-          cyan: "hsl(var(--holographic-cyan))",
-          violet: "hsl(var(--holographic-violet))",
-          green: "hsl(var(--holographic-green))",
+        logo: {
+          white: "hsl(var(--logo-white))",
+          light: "hsl(var(--logo-light))",
+          mid: "hsl(var(--logo-mid))",
+          dark: "hsl(var(--logo-dark))",
         },
       },
       borderRadius: {
