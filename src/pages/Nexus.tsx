@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowLeft, Network, Users, GitBranch, Globe, Award, Sparkles, Building2, GraduationCap } from "lucide-react";
+import { ArrowLeft, Network, Users, GitBranch, Globe, Award, Sparkles, Building2, GraduationCap, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
@@ -89,13 +89,24 @@ const Nexus = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground overflow-hidden">
       {/* Hero Section */}
       <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
-        {/* Animated network background */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/30 rounded-full blur-3xl animate-pulse-glow" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: "1s" }} />
+        {/* Enhanced animated background */}
+        <div className="absolute inset-0 opacity-15">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `
+              linear-gradient(hsl(var(--primary) / 0.2) 1px, transparent 1px),
+              linear-gradient(90deg, hsl(var(--primary) / 0.2) 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px',
+            animation: 'grid-move 25s linear infinite'
+          }} />
+        </div>
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse-glow" />
+          <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-primary/15 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: "1.5s" }} />
+          <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: "3s" }} />
         </div>
 
         <div className="relative z-10 text-center px-8 max-w-5xl mx-auto">
@@ -109,21 +120,48 @@ const Nexus = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <Network className="w-20 h-20 mx-auto mb-6 text-primary animate-pulse-glow" />
+            <motion.div
+              animate={{ 
+                scale: [1, 1.05, 1],
+                rotate: [0, 5, -5, 0]
+              }}
+              transition={{ 
+                duration: 6, 
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="inline-block mb-8"
+            >
+              <Network className="w-20 h-20 mx-auto text-primary glow-soft" />
+            </motion.div>
+            
             <h1 className="text-6xl md:text-7xl font-bold mb-6 holographic-text">
               Codmek Nexus
             </h1>
-            <p className="text-2xl md:text-3xl text-foreground/80 mb-4">
+            
+            <motion.p 
+              className="text-2xl md:text-3xl text-foreground/80 mb-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+            >
               Collaborate. Co-create. Connect.
-            </p>
-            <p className="text-lg text-foreground/60 max-w-2xl mx-auto">
+            </motion.p>
+            
+            <motion.p 
+              className="text-lg text-foreground/60 max-w-2xl mx-auto"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+            >
               A portal where innovators, researchers, and builders converge to shape the future of intelligence.
-            </p>
+            </motion.p>
           </motion.div>
         </div>
 
-        {/* Decorative elements */}
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
+        {/* Enhanced decorative elements */}
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
       </section>
 
       {/* Collaboration Hubs Grid */}
@@ -150,14 +188,33 @@ const Nexus = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 onClick={() => setSelectedHub(hub.id)}
-                className="glass-panel p-6 cursor-pointer group hover:scale-105 transition-all duration-300 border border-border/50 hover:border-primary/50"
+                className="glass-panel p-8 cursor-pointer group hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 border border-border/50 hover:border-primary/60 relative overflow-hidden"
               >
-                <Icon className="w-12 h-12 mb-4 text-primary group-hover:scale-110 transition-transform" />
-                <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
+                {/* Hover glow effect */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none" />
+                
+                <motion.div
+                  whileHover={{ scale: 1.1, rotate: [0, -3, 3, 0] }}
+                  transition={{ duration: 0.3 }}
+                  className="relative mb-6"
+                >
+                  <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <Icon className="w-14 h-14 text-primary/80 group-hover:text-primary transition-colors relative z-10" />
+                </motion.div>
+                
+                <h3 className="text-2xl font-bold mb-3 group-hover:holographic-text transition-all duration-300 relative">
                   {hub.title}
                 </h3>
-                <p className="text-foreground/60 text-sm mb-4">{hub.tagline}</p>
-                <div className="text-primary/70 text-xs font-mono">EXPLORE →</div>
+                <p className="text-foreground/60 text-sm mb-4 font-light italic relative">{hub.tagline}</p>
+                
+                <motion.div 
+                  className="flex items-center gap-2 text-primary/70 text-xs font-mono group-hover:text-primary transition-colors relative"
+                  initial={{ x: 0 }}
+                  whileHover={{ x: 5 }}
+                >
+                  <span>EXPLORE</span>
+                  <ArrowRight className="w-4 h-4" />
+                </motion.div>
               </motion.div>
             );
           })}
@@ -170,52 +227,75 @@ const Nexus = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="glass-panel p-12 text-center"
+          className="glass-panel p-16 text-center border border-primary/20"
         >
-          <Globe className="w-16 h-16 mx-auto mb-6 text-primary animate-pulse-glow" />
-          <h3 className="text-3xl font-bold mb-4">A Global Movement</h3>
+          <motion.div
+            animate={{ 
+              rotateY: [0, 360],
+            }}
+            transition={{ 
+              duration: 20, 
+              repeat: Infinity,
+              ease: "linear"
+            }}
+            className="inline-block mb-8"
+          >
+            <Globe className="w-20 h-20 mx-auto text-primary glow-soft" />
+          </motion.div>
+          <h3 className="text-4xl font-bold mb-6 holographic-text">A Global Movement</h3>
           <p className="text-foreground/70 max-w-3xl mx-auto mb-8">
             From solo developers to enterprise teams, from university labs to government institutions — 
             Codmek Nexus is where boundaries dissolve and collective intelligence emerges.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
-            <div className="glass-panel p-6">
-              <div className="text-4xl font-bold text-primary mb-2">150+</div>
-              <div className="text-sm text-foreground/60">Active Contributors</div>
-            </div>
-            <div className="glass-panel p-6">
-              <div className="text-4xl font-bold text-primary mb-2">40+</div>
-              <div className="text-sm text-foreground/60">Research Partners</div>
-            </div>
-            <div className="glass-panel p-6">
-              <div className="text-4xl font-bold text-primary mb-2">25+</div>
-              <div className="text-sm text-foreground/60">Countries</div>
-            </div>
-            <div className="glass-panel p-6">
-              <div className="text-4xl font-bold text-primary mb-2">12</div>
-              <div className="text-sm text-foreground/60">Active Projects</div>
-            </div>
+            {[
+              { value: "150+", label: "Active Contributors", delay: 0 },
+              { value: "40+", label: "Research Partners", delay: 0.1 },
+              { value: "25+", label: "Countries", delay: 0.2 },
+              { value: "12", label: "Active Projects", delay: 0.3 }
+            ].map((stat, idx) => (
+              <motion.div 
+                key={idx}
+                className="glass-panel p-8 border border-border/30 hover:border-primary/40 transition-all duration-300"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: stat.delay }}
+                whileHover={{ scale: 1.05 }}
+              >
+                <div className="text-5xl font-bold holographic-text mb-3">{stat.value}</div>
+                <div className="text-sm text-foreground/60 font-light">{stat.label}</div>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 px-8 text-center">
+      <section className="py-32 px-8 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="max-w-3xl mx-auto"
         >
-          <h2 className="text-4xl font-bold mb-6 holographic-text">
+          <h2 className="text-5xl font-bold mb-8 holographic-text">
             Ready to Connect?
           </h2>
-          <p className="text-foreground/70 mb-8 text-lg">
+          <p className="text-foreground/70 mb-12 text-xl leading-relaxed">
             Whether you're a researcher, developer, partner, or visionary — there's a place for you in the Nexus.
           </p>
-          <button className="glass-panel px-8 py-4 text-lg font-semibold hover:scale-105 transition-transform border border-primary/50 hover:border-primary">
-            Join the Network →
-          </button>
+          <motion.button 
+            className="glass-panel px-10 py-5 text-lg font-semibold border border-primary/50 hover:border-primary group relative overflow-hidden"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <span className="relative z-10 flex items-center gap-3">
+              Join the Network
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </span>
+            <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+          </motion.button>
         </motion.div>
       </section>
 
