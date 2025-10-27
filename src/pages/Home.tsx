@@ -1,9 +1,22 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Brain, Palette, GraduationCap, Cpu, Network, ArrowRight, Sparkles } from "lucide-react";
+import { Canvas } from "@react-three/fiber";
+import { Suspense, useState, useEffect, useRef } from "react";
 import codmekLogo from "@/assets/codmek-logo.png";
+import { LoadingBanner } from "@/components/LoadingBanner";
+import { Scene3D } from "@/components/Scene3D";
 
 const Home = () => {
+  const [showContent, setShowContent] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+  
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
+  const heroScale = useTransform(scrollYProgress, [0, 0.3], [1, 0.95]);
   const verticals = [
     {
       id: "research",
@@ -53,7 +66,24 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <>
+      {/* Loading Banner */}
+      {!showContent && <LoadingBanner onComplete={() => setShowContent(true)} />}
+      
+      {showContent && (
+    <div ref={containerRef} className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      {/* 3D Background Scene */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        <Canvas
+          camera={{ position: [0, 0, 8], fov: 50 }}
+          style={{ background: 'transparent' }}
+        >
+          <Suspense fallback={null}>
+            <Scene3D />
+          </Suspense>
+        </Canvas>
+      </div>
+
       {/* Enhanced Animated Background */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         {/* Animated grid */}
@@ -74,12 +104,13 @@ const Home = () => {
         <div className="absolute top-1/2 right-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: "3s" }} />
       </div>
 
-      {/* Enhanced Hero Header */}
+      {/* Enhanced Hero Header with Parallax */}
       <motion.header 
         className="relative z-10 pt-20 pb-16 min-h-[70vh] flex flex-col items-center justify-center"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
+        style={{ opacity: heroOpacity, scale: heroScale }}
       >
         <div className="container mx-auto px-6 text-center">
           <motion.div
@@ -131,14 +162,29 @@ const Home = () => {
             Pioneering the future of artificial intelligence through research, creativity, and enterprise solutions
           </motion.p>
 
-          {/* Scroll indicator */}
+          {/* Interactive scroll indicator */}
           <motion.div
             initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1.2, repeat: Infinity, repeatType: "reverse" }}
-            className="text-foreground/40 text-sm font-mono"
+            animate={{ opacity: 1, y: [0, 10, 0] }}
+            transition={{ 
+              opacity: { duration: 1, delay: 1.2 },
+              y: { duration: 1.5, repeat: Infinity, ease: "easeInOut" }
+            }}
+            className="flex flex-col items-center gap-2"
           >
-            ↓ EXPLORE OUR DIVISIONS ↓
+            <motion.div
+              className="w-6 h-10 border-2 border-primary/40 rounded-full flex items-start justify-center p-2"
+              whileHover={{ borderColor: "hsl(var(--primary))" }}
+            >
+              <motion.div
+                className="w-1.5 h-1.5 bg-primary rounded-full"
+                animate={{ y: [0, 12, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              />
+            </motion.div>
+            <span className="text-foreground/40 text-xs font-mono tracking-wider">
+              SCROLL TO EXPLORE
+            </span>
           </motion.div>
         </div>
       </motion.header>
@@ -174,14 +220,40 @@ const Home = () => {
                 <Link to={vertical.path} className="block h-full">
                   <motion.div
                     className={`glass-panel h-full p-8 rounded-lg border border-border/50 bg-gradient-to-br ${vertical.gradient} relative overflow-hidden group cursor-pointer`}
-                    whileHover={{ scale: 1.03, y: -5 }}
+                    whileHover={{ scale: 1.03, y: -8 }}
                     transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
                   >
                     {/* Animated border glow */}
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none border-2 border-primary/30 rounded-lg" />
+                    <motion.div 
+                      className="absolute inset-0 pointer-events-none rounded-lg"
+                      initial={{ opacity: 0 }}
+                      whileHover={{ opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div className="absolute inset-0 border-2 border-primary/40 rounded-lg" 
+                        style={{
+                          boxShadow: '0 0 20px hsl(var(--primary) / 0.3), inset 0 0 20px hsl(var(--primary) / 0.1)'
+                        }}
+                      />
+                    </motion.div>
                     
                     {/* Background glow effect */}
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none" />
+                    
+                    {/* Scan line effect on hover */}
+                    <motion.div
+                      className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100"
+                      initial={{ top: "-100%" }}
+                      whileHover={{
+                        top: "100%",
+                        transition: { duration: 1.5, repeat: Infinity, ease: "linear" }
+                      }}
+                    >
+                      <div className="h-px w-full bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+                    </motion.div>
                     
                     {/* Icon with enhanced animation */}
                     <motion.div 
@@ -257,6 +329,8 @@ const Home = () => {
         </div>
       </motion.footer>
     </div>
+      )}
+    </>
   );
 };
 
