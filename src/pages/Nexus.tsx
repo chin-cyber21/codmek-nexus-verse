@@ -3,6 +3,7 @@ import { ArrowLeft, Network, Users, GitBranch, Globe, Award, Sparkles, Building2
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import Navbar from "@/components/Navbar";
 
 const Nexus = () => {
   const [selectedHub, setSelectedHub] = useState<string | null>(null);
@@ -90,6 +91,9 @@ const Nexus = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
+      {/* Global Navbar */}
+      <Navbar />
+      
       {/* Hero Section */}
       <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
         {/* Enhanced animated background */}

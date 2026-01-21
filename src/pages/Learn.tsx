@@ -1,10 +1,14 @@
 import { motion } from "framer-motion";
 import { ArrowLeft, Lock, Sparkles, Grid3x3, Brain, Zap, Eye } from "lucide-react";
 import { Link } from "react-router-dom";
+import Navbar from "@/components/Navbar";
 
 const Learn = () => {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
+      {/* Global Navbar */}
+      <Navbar />
+      
       {/* Enhanced Mysterious Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Enhanced animated grid background */}

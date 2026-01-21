@@ -6,6 +6,7 @@ import { Suspense, useState, useEffect, useRef } from "react";
 import codmekLogo from "@/assets/codmek-logo.png";
 import { LoadingBanner } from "@/components/LoadingBanner";
 import { Scene3D } from "@/components/Scene3D";
+import Navbar from "@/components/Navbar";
 
 const Home = () => {
   const [showContent, setShowContent] = useState(false);
@@ -72,6 +73,9 @@ const Home = () => {
       
       {showContent && (
     <div ref={containerRef} className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      {/* Global Navbar */}
+      <Navbar />
+      
       {/* 3D Background Scene */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <Canvas
