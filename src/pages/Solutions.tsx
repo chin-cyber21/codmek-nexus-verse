@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import Navbar from "@/components/Navbar";
 
 const solutions = [
   {
@@ -136,6 +137,9 @@ const Solutions = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      {/* Global Navbar */}
+      <Navbar />
+      
       {/* Hero Section */}
       <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/50 to-background" />

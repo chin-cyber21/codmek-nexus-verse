@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, Brain, Eye, Dna, Bot, Network, Scan } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import Navbar from "@/components/Navbar";
 
 interface ResearchDivision {
   id: string;
@@ -92,6 +93,9 @@ const Research = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      {/* Global Navbar */}
+      <Navbar />
+      
       {/* Navigation */}
       <div className="fixed top-8 left-8 z-50">
         <Link 
