@@ -2,11 +2,12 @@ import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Brain, Palette, GraduationCap, Cpu, Network, ArrowRight, Sparkles } from "lucide-react";
 import { Canvas } from "@react-three/fiber";
-import { Suspense, useState, useEffect, useRef } from "react";
+import { Suspense, useState, useRef } from "react";
 import codmekLogo from "@/assets/codmek-logo.png";
 import { LoadingBanner } from "@/components/LoadingBanner";
 import { Scene3D } from "@/components/Scene3D";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const Home = () => {
   const [showContent, setShowContent] = useState(false);
@@ -299,39 +300,8 @@ const Home = () => {
         </div>
       </motion.main>
 
-      {/* Enhanced Footer */}
-      <motion.footer 
-        className="relative z-10 py-16 mt-32"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 1.5 }}
-      >
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
-            <div className="h-px w-full bg-gradient-to-r from-transparent via-primary/30 to-transparent mb-12" />
-            
-            <div className="text-center space-y-6">
-              <motion.p 
-                className="text-foreground/70 text-lg italic max-w-2xl mx-auto"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.7 }}
-              >
-                "The best way to predict the future is to build it."
-              </motion.p>
-              
-              <motion.p 
-                className="text-foreground/50 text-sm"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.9 }}
-              >
-                © 2025 Codmek. Building the future of intelligence.
-              </motion.p>
-            </div>
-          </div>
-        </div>
-      </motion.footer>
+      {/* Footer */}
+      <Footer />
     </div>
       )}
     </>

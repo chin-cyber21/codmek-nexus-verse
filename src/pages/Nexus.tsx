@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const Nexus = () => {
   const [selectedHub, setSelectedHub] = useState<string | null>(null);
@@ -342,6 +343,9 @@ const Nexus = () => {
           })()}
         </DialogContent>
       </Dialog>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Lock, Sparkles, Grid3x3, Brain, Zap, Eye } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const Learn = () => {
   return (
@@ -291,6 +292,9 @@ const Learn = () => {
           </div>
         </motion.div>
       </section>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };

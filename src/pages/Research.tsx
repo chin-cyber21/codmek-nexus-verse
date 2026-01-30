@@ -4,6 +4,7 @@ import { ArrowLeft, Brain, Eye, Dna, Bot, Network, Scan } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 interface ResearchDivision {
   id: string;
@@ -352,6 +353,9 @@ const Research = () => {
           )}
         </DialogContent>
       </Dialog>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };

@@ -101,6 +101,20 @@ All colors MUST be HSL.
     animation: grid-move 20s linear infinite;
   }
 
+  /* Mobile-friendly touch targets */
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
+
+  /* Safe area padding for mobile */
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top, 0);
+  }
+
   @keyframes float {
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-20px); }
@@ -118,5 +132,25 @@ All colors MUST be HSL.
   @keyframes grid-move {
     0% { transform: translateY(0) translateX(0); }
     100% { transform: translateY(-50px) translateX(-50px); }
+  }
+}
+
+/* Mobile performance optimizations */
+@media (max-width: 768px) {
+  .holographic-text {
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.2));
+  }
+
+  .glass-panel {
+    @apply backdrop-blur-xl;
+  }
+
+  /* Reduce animations on mobile for performance */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-float,
+    .animate-pulse-glow,
+    .animate-grid-move {
+      animation: none;
+    }
   }
 }
