@@ -1,9 +1,10 @@
-import { useRef, useState } from "react";
-import { Canvas, useFrame, useLoader } from "@react-three/fiber";
+import { useRef, useState, useEffect } from "react";
+import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
 import { OrbitControls, Float, Sphere, Box, Octahedron, Dodecahedron } from "@react-three/drei";
 import * as THREE from "three";
 import { TextureLoader } from "three";
 import codmekLogo from "@/assets/codmek-logo.png";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface PodProps {
   position: [number, number, number];
@@ -178,8 +179,16 @@ interface Studio3DProps {
 
 const Studio3D = ({ onPodClick }: Studio3DProps) => {
   const [hoveredPod, setHoveredPod] = useState<string | null>(null);
+  const isMobile = useIsMobile();
 
-  const pods = [
+  // Adjusted pod positions for mobile
+  const pods = isMobile ? [
+    { name: "Reception", position: [-2.5, 0, 1] as [number, number, number], shape: "octahedron" as const },
+    { name: "Research", position: [2.5, 0.5, 0] as [number, number, number], shape: "dodecahedron" as const },
+    { name: "Workshop", position: [0, -0.5, 2.5] as [number, number, number], shape: "box" as const },
+    { name: "Nexus", position: [-2, 0.5, -2] as [number, number, number], shape: "sphere" as const },
+    { name: "Learn", position: [2, 0, -2.5] as [number, number, number], shape: "octahedron" as const },
+  ] : [
     { name: "Reception", position: [-5, 0, 2] as [number, number, number], shape: "octahedron" as const },
     { name: "Research", position: [5, 1, 0] as [number, number, number], shape: "dodecahedron" as const },
     { name: "Workshop", position: [0, -1, 5] as [number, number, number], shape: "box" as const },
@@ -188,51 +197,56 @@ const Studio3D = ({ onPodClick }: Studio3DProps) => {
   ];
 
   return (
-    <div className="w-full h-screen">
+    <div className="w-full h-screen touch-none">
       <Canvas 
-        camera={{ position: [0, 3, 12], fov: 60 }}
+        camera={{ 
+          position: isMobile ? [0, 2, 8] : [0, 3, 12], 
+          fov: isMobile ? 70 : 60 
+        }}
         gl={{ 
-          antialias: true,
+          antialias: !isMobile, // Disable antialiasing on mobile for performance
           alpha: true,
-          powerPreference: "high-performance",
+          powerPreference: isMobile ? "low-power" : "high-performance",
           toneMapping: THREE.ACESFilmicToneMapping,
           toneMappingExposure: 1.2,
         }}
-        shadows
-        dpr={[1, 2]}
+        shadows={!isMobile} // Disable shadows on mobile
+        dpr={isMobile ? [1, 1.5] : [1, 2]} // Lower DPR on mobile
       >
         <color attach="background" args={["#020202"]} />
-        <fog attach="fog" args={["#020202", 10, 35]} />
+        <fog attach="fog" args={["#020202", isMobile ? 8 : 10, isMobile ? 25 : 35]} />
 
         {/* Enhanced lighting */}
-        <ambientLight intensity={0.3} />
+        <ambientLight intensity={isMobile ? 0.4 : 0.3} />
         <directionalLight 
           position={[10, 10, 5]} 
           intensity={0.8} 
           color="#ffffff"
-          castShadow
-          shadow-mapSize={[2048, 2048]}
+          castShadow={!isMobile}
+          shadow-mapSize={isMobile ? [512, 512] : [2048, 2048]}
         />
         <pointLight 
           position={[0, 0, 0]} 
-          intensity={2} 
+          intensity={isMobile ? 1.5 : 2} 
           color="#ffffff" 
           distance={25}
           decay={2}
         />
-        <spotLight
-          position={[0, 10, 0]}
-          angle={0.5}
-          penumbra={1}
-          intensity={1}
-          castShadow
-        />
+        {!isMobile && (
+          <spotLight
+            position={[0, 10, 0]}
+            angle={0.5}
+            penumbra={1}
+            intensity={1}
+            castShadow
+          />
+        )}
 
         {/* Central Logo */}
         <CentralLogo />
 
-        {/* Wireframe environments */}
-        <WireframeNet />
+        {/* Wireframe environments - simplified on mobile */}
+        {!isMobile && <WireframeNet />}
         <AnimatedGrid />
 
         {/* Interactive Pods */}
@@ -248,18 +262,22 @@ const Studio3D = ({ onPodClick }: Studio3DProps) => {
           />
         ))}
 
-        {/* Enhanced Controls */}
+        {/* Enhanced Controls - touch-friendly settings for mobile */}
         <OrbitControls
           enableZoom={true}
           enablePan={false}
-          minDistance={8}
-          maxDistance={25}
+          minDistance={isMobile ? 5 : 8}
+          maxDistance={isMobile ? 18 : 25}
           autoRotate
-          autoRotateSpeed={0.25}
+          autoRotateSpeed={isMobile ? 0.15 : 0.25}
           maxPolarAngle={Math.PI / 1.8}
           minPolarAngle={Math.PI / 4}
           enableDamping
-          dampingFactor={0.05}
+          dampingFactor={isMobile ? 0.1 : 0.05}
+          touches={{
+            ONE: THREE.TOUCH.ROTATE,
+            TWO: THREE.TOUCH.DOLLY_ROTATE
+          }}
         />
       </Canvas>
     </div>
