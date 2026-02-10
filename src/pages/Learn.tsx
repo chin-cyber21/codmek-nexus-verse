@@ -254,7 +254,7 @@ const Learn = () => {
             className="mt-16 glass-panel inline-block px-8 py-4 border border-primary/40"
           >
             <span className="text-primary font-bold text-xl tracking-wider">
-              ACCESS GRANTED: Q2 2025
+              LAUNCHING SOON
             </span>
           </motion.div>
         </motion.div>
