@@ -3,7 +3,7 @@ import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
 import { OrbitControls, Float, Sphere, Box, Octahedron, Dodecahedron } from "@react-three/drei";
 import * as THREE from "three";
 import { TextureLoader } from "three";
-import codmekLogo from "@/assets/codmek-logo.png";
+import codmekLogo from "@/assets/codmek-logo-new.jpg";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 interface PodProps {
@@ -88,10 +88,10 @@ const CentralLogo = () => {
 
   return (
     <group ref={groupRef} position={[0, 0, 0]}>
-      {/* Logo plane with actual Codmek logo */}
+      {/* Logo plane - double sided so visible from back */}
       <mesh>
         <planeGeometry args={[4, 4]} />
-        <meshBasicMaterial map={texture} transparent opacity={0.95} />
+        <meshBasicMaterial map={texture} transparent opacity={0.95} side={THREE.DoubleSide} />
       </mesh>
       
       {/* Wireframe hexagon around logo */}

@@ -37,7 +37,7 @@ const Footer = () => {
     {
       name: "LinkedIn",
       icon: Linkedin,
-      href: "https://linkedin.com/company/codmek",
+      href: "https://www.linkedin.com/company/codmek-softech/",
       label: "Codmek Softech"
     },
     {
