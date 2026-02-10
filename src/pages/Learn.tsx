@@ -3,10 +3,17 @@ import { ArrowLeft, Lock, Sparkles, Grid3x3, Brain, Zap, Eye } from "lucide-reac
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 
 const Learn = () => {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
+      <SEO
+        title="Learn"
+        description="Codmek Learn — an upcoming AI knowledge platform for courses, tutorials, and community learning in artificial intelligence and machine learning."
+        path="/learn"
+        keywords="AI learning, machine learning courses, AI tutorials, Codmek Learn, AI education"
+      />
       {/* Global Navbar */}
       <Navbar />
       

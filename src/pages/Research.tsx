@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 
 interface ResearchDivision {
   id: string;
@@ -94,6 +95,12 @@ const Research = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      <SEO
+        title="Research"
+        description="Explore Codmek's AI research divisions: AGI architectures, neural interpretability, cognitive computing, autonomous agents, and synthetic consciousness."
+        path="/research"
+        keywords="AI research, AGI, neural networks, cognitive computing, autonomous agents, Codmek research labs"
+      />
       {/* Global Navbar */}
       <Navbar />
       

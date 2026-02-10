@@ -8,6 +8,7 @@ import { LoadingBanner } from "@/components/LoadingBanner";
 import { Scene3D } from "@/components/Scene3D";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 
 const Home = () => {
   const [showContent, setShowContent] = useState(false);
@@ -69,6 +70,12 @@ const Home = () => {
 
   return (
     <>
+      <SEO
+        title="Codmek Softech — AI Research, Innovation & Crafting Tech"
+        description="Codmek Softech pioneers artificial intelligence through cutting-edge research, creative innovation, and enterprise solutions. Explore our AI labs, studio, and services."
+        path="/"
+        keywords="Codmek, Codmek Softech, AI research, artificial intelligence, machine learning, software development, AI solutions, AI company"
+      />
       {/* Loading Banner */}
       {!showContent && <LoadingBanner onComplete={() => setShowContent(true)} />}
       
