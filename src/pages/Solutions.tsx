@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 
 const solutions = [
   {
@@ -138,6 +139,12 @@ const Solutions = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SEO
+        title="Solutions"
+        description="Enterprise AI solutions by Codmek Softech: AI engineering, software development, automation, robotics, cloud infrastructure, and consulting services."
+        path="/solutions"
+        keywords="AI solutions, enterprise AI, software development, automation, robotics, cloud engineering, Codmek services"
+      />
       {/* Global Navbar */}
       <Navbar />
       
