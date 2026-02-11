@@ -95,9 +95,21 @@ const Nexus = () => {
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
       <SEO
         title="Nexus"
-        description="Codmek Nexus — our global partnership hub for open-source collaboration, academic research, industry alliances, and cross-domain innovation."
+        description="Codmek Nexus — global partnership hub for open-source collaboration, academic research, government AI, and cross-domain innovation with 150+ active contributors worldwide."
         path="/nexus"
-        keywords="AI partnerships, open source, academic collaboration, innovation hub, Codmek Nexus"
+        keywords="AI partnerships, open source AI, academic collaboration, innovation hub, Codmek Nexus, AI community, government AI, research partnerships"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": "Codmek Nexus — Global AI Partnership Hub",
+          "url": "https://codmek.com/nexus",
+          "description": "A portal for innovators, researchers, and builders to collaborate on AI projects and drive open-source innovation.",
+          "mainEntity": {
+            "@type": "Organization",
+            "name": "Codmek Nexus",
+            "parentOrganization": { "@type": "Organization", "name": "Codmek Softech" }
+          }
+        }}
       />
       {/* Global Navbar */}
       <Navbar />

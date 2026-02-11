@@ -72,9 +72,21 @@ const Home = () => {
     <>
       <SEO
         title="Codmek Softech — AI Research, Innovation & Crafting Tech"
-        description="Codmek Softech pioneers artificial intelligence through cutting-edge research, creative innovation, and enterprise solutions. Explore our AI labs, studio, and services."
+        description="Codmek Softech is an AI-native company building intelligent solutions across research, studio, learning, enterprise solutions, and global partnerships. Headquartered in Jaipur, India."
         path="/"
-        keywords="Codmek, Codmek Softech, AI research, artificial intelligence, machine learning, software development, AI solutions, AI company"
+        keywords="Codmek, Codmek Softech, AI research company, artificial intelligence, machine learning, deep learning, AI solutions, AI startup India, Jaipur AI company, enterprise AI, AGI research, intelligent automation, AI software development"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": "Codmek Softech — AI Research, Innovation & Enterprise Solutions",
+          "description": "Codmek Softech pioneers artificial intelligence through cutting-edge research, creative innovation, and enterprise solutions.",
+          "url": "https://codmek.com/",
+          "mainEntity": {
+            "@type": "Organization",
+            "name": "Codmek Softech",
+            "url": "https://codmek.com"
+          }
+        }}
       />
       {/* Loading Banner */}
       {!showContent && <LoadingBanner onComplete={() => setShowContent(true)} />}
