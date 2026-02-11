@@ -97,9 +97,18 @@ const Research = () => {
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <SEO
         title="Research"
-        description="Explore Codmek's AI research divisions: AGI architectures, neural interpretability, cognitive computing, autonomous agents, and synthetic consciousness."
+        description="Codmek Research — exploring AGI architectures, neural interpretability, computational biology, autonomous robotics, graph intelligence, and 3D computer vision."
         path="/research"
-        keywords="AI research, AGI, neural networks, cognitive computing, autonomous agents, Codmek research labs"
+        keywords="AI research, AGI research, neural networks, cognitive computing, autonomous agents, computer vision, computational biology, digital twins, graph neural networks, Codmek research labs, AI R&D India"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "ResearchOrganization",
+          "name": "Codmek Research",
+          "url": "https://codmek.com/research",
+          "parentOrganization": { "@type": "Organization", "name": "Codmek Softech", "url": "https://codmek.com" },
+          "description": "AI research division exploring AGI, neural interpretability, computational biology, autonomous systems, and graph intelligence.",
+          "knowsAbout": ["Artificial General Intelligence", "Neural Interpretability", "Computational Biology", "Autonomous Robotics", "Graph Neural Networks", "3D Computer Vision"]
+        }}
       />
       {/* Global Navbar */}
       <Navbar />

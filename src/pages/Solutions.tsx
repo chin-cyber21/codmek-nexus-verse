@@ -103,6 +103,21 @@ const solutions = [
       "Cost optimization & performance tuning"
     ],
     color: "from-slate-500/20 to-zinc-500/20"
+  },
+  {
+    id: "raas",
+    icon: Brain,
+    title: "Research as a Service (RaaS)",
+    tagline: "Your R&D lab, powered by Codmek's research engine",
+    capabilities: [
+      "Outsourced AI/ML R&D for enterprises and startups",
+      "Custom research sprints with deliverable reports",
+      "White-label research and IP development",
+      "Dedicated research teams for long-term innovation",
+      "Literature review, benchmarking, and feasibility studies",
+      "Prototype-to-paper pipeline for publishable research"
+    ],
+    color: "from-cyan-500/20 to-indigo-500/20"
   }
 ];
 
@@ -141,9 +156,55 @@ const Solutions = () => {
     <div className="min-h-screen bg-background text-foreground">
       <SEO
         title="Solutions"
-        description="Enterprise AI solutions by Codmek Softech: AI engineering, software development, automation, robotics, cloud infrastructure, and consulting services."
+        description="Enterprise AI solutions by Codmek Softech: AI/ML engineering, intelligent software, business automation, robotics, cloud infrastructure, consulting, and Research as a Service (RaaS)."
         path="/solutions"
-        keywords="AI solutions, enterprise AI, software development, automation, robotics, cloud engineering, Codmek services"
+        keywords="AI solutions, enterprise AI, AI software development, business process automation, RPA, robotics, cloud engineering, MLOps, AI consulting, Research as a Service, RaaS, Codmek services, AI company India"
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "serviceType": "AI & Technology Solutions",
+            "provider": { "@type": "Organization", "name": "Codmek Softech", "url": "https://codmek.com" },
+            "url": "https://codmek.com/solutions",
+            "description": "Enterprise AI solutions including ML engineering, software development, automation, robotics, cloud infrastructure, and research-as-a-service.",
+            "areaServed": "Worldwide",
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Codmek Solutions",
+              "itemListElement": [
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI & Machine Learning Engineering", "description": "Custom AI/ML models, generative AI, predictive analytics, cloud deployment" }},
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Software Development", "description": "Web and mobile apps with embedded AI, scalable APIs and microservices" }},
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Business Process Automation", "description": "RPA, intelligent document automation, multi-agent optimization" }},
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Rapid Application Development", "description": "AI-powered MVP development, low-code integration, rapid deployment" }},
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Consulting & Advisory", "description": "AI readiness assessment, architecture design, ethics and compliance" }},
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Robotics & Autonomous Systems", "description": "AI-driven robotics, computer vision, edge AI, mechatronic design" }},
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Data & Cloud Infrastructure", "description": "Cloud hosting, MLOps pipelines, data engineering, cost optimization" }},
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Research as a Service (RaaS)", "description": "Outsourced R&D, custom research sprints, white-label AI research" }}
+              ]
+            }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What AI services does Codmek offer?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Codmek offers AI/ML engineering, intelligent software development, business process automation, robotics, cloud infrastructure, consulting, and Research as a Service (RaaS)." }
+              },
+              {
+                "@type": "Question",
+                "name": "What is Research as a Service (RaaS)?",
+                "acceptedAnswer": { "@type": "Answer", "text": "RaaS lets enterprises outsource R&D to Codmek's research labs. We conduct custom research sprints, deliver white-label findings, and provide dedicated research teams for your innovation goals." }
+              },
+              {
+                "@type": "Question",
+                "name": "Does Codmek work with startups and enterprises?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Yes. Codmek works with startups, SMEs, enterprises, academic institutions, and government bodies worldwide to deploy AI solutions." }
+              }
+            ]
+          }
+        ]}
       />
       {/* Global Navbar */}
       <Navbar />

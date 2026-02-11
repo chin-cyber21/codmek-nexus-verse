@@ -10,9 +10,17 @@ const Learn = () => {
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
       <SEO
         title="Learn"
-        description="Codmek Learn — an upcoming AI knowledge platform for courses, tutorials, and community learning in artificial intelligence and machine learning."
+        description="Codmek Learn — an upcoming AI knowledge platform featuring bootcamps, hackathons, mentorships, and gamified courses in artificial intelligence and machine learning."
         path="/learn"
-        keywords="AI learning, machine learning courses, AI tutorials, Codmek Learn, AI education"
+        keywords="AI learning platform, machine learning courses, AI tutorials, AI bootcamp, AI hackathon, Codmek Learn, AI education India, learn artificial intelligence"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "EducationalOrganization",
+          "name": "Codmek Learn",
+          "url": "https://codmek.com/learn",
+          "parentOrganization": { "@type": "Organization", "name": "Codmek Softech", "url": "https://codmek.com" },
+          "description": "AI knowledge platform offering bootcamps, hackathons, mentorships, and gamified learning in artificial intelligence."
+        }}
       />
       {/* Global Navbar */}
       <Navbar />
