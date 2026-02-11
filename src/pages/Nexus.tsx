@@ -309,8 +309,9 @@ const Nexus = () => {
           <p className="text-foreground/70 mb-12 text-xl leading-relaxed">
             Whether you're a researcher, developer, partner, or visionary — there's a place for you in the Nexus.
           </p>
-          <motion.button 
-            className="glass-panel px-10 py-5 text-lg font-semibold border border-primary/50 hover:border-primary group relative overflow-hidden"
+          <motion.a
+            href="mailto:contact@codmek.com?subject=Nexus%20Partnership%20Inquiry"
+            className="inline-block glass-panel px-10 py-5 text-lg font-semibold border border-primary/50 hover:border-primary group relative overflow-hidden"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
           >
@@ -319,7 +320,7 @@ const Nexus = () => {
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </span>
             <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-          </motion.button>
+          </motion.a>
         </motion.div>
       </section>
 
@@ -350,12 +351,18 @@ const Nexus = () => {
                   </ul>
                 </div>
                 <div className="mt-8 flex gap-4">
-                  <button className="flex-1 glass-panel px-6 py-3 font-semibold hover:scale-105 transition-transform border border-primary/50">
+                  <a
+                    href={`mailto:contact@codmek.com?subject=${encodeURIComponent(`Learn More: ${hubs.find(h => h.id === selectedHub)?.title || 'Nexus'}`)}`}
+                    className="flex-1 glass-panel px-6 py-3 font-semibold hover:scale-105 transition-transform border border-primary/50 text-center"
+                  >
                     Learn More
-                  </button>
-                  <button className="flex-1 bg-primary/10 px-6 py-3 font-semibold hover:bg-primary/20 transition-colors rounded border border-primary/30">
+                  </a>
+                  <a
+                    href={`mailto:contact@codmek.com?subject=${encodeURIComponent(`Get Involved: ${hubs.find(h => h.id === selectedHub)?.title || 'Nexus'}`)}`}
+                    className="flex-1 bg-primary/10 px-6 py-3 font-semibold hover:bg-primary/20 transition-colors rounded border border-primary/30 text-center"
+                  >
                     Get Involved
-                  </button>
+                  </a>
                 </div>
               </>
             );
