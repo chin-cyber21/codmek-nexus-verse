@@ -252,12 +252,14 @@ const Solutions = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
             >
-              <Button size="lg" className="gap-2">
+              <Button size="lg" className="gap-2" onClick={() => document.getElementById('solutions-grid')?.scrollIntoView({ behavior: 'smooth' })}>
                 Explore Solutions
                 <ChevronRight className="w-4 h-4" />
               </Button>
-              <Button size="lg" variant="outline">
-                Schedule Consultation
+              <Button size="lg" variant="outline" asChild>
+                <a href="mailto:contact@codmek.com?subject=Consultation%20Request">
+                  Schedule Consultation
+                </a>
               </Button>
             </motion.div>
           </motion.div>
@@ -265,7 +267,7 @@ const Solutions = () => {
       </section>
 
       {/* Solutions Grid */}
-      <section className="py-24 px-8">
+      <section id="solutions-grid" className="py-24 px-8">
         <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -384,9 +386,11 @@ const Solutions = () => {
               </p>
               
               <div className="flex gap-4 justify-center flex-wrap">
-                <Button size="lg" className="gap-2">
-                  Schedule a Consultation
-                  <ChevronRight className="w-4 h-4" />
+                <Button size="lg" className="gap-2" asChild>
+                  <a href="mailto:contact@codmek.com?subject=Consultation%20Request">
+                    Schedule a Consultation
+                    <ChevronRight className="w-4 h-4" />
+                  </a>
                 </Button>
                 <Link to="/nexus">
                   <Button size="lg" variant="outline">
@@ -428,9 +432,11 @@ const Solutions = () => {
                 </div>
 
                 <div className="pt-6 border-t border-foreground/10">
-                  <Button className="w-full gap-2">
-                    Request More Information
-                    <ChevronRight className="w-4 h-4" />
+                  <Button className="w-full gap-2" asChild>
+                    <a href={`mailto:contact@codmek.com?subject=${encodeURIComponent(`Inquiry: ${selectedSolution.title}`)}`}>
+                      Request More Information
+                      <ChevronRight className="w-4 h-4" />
+                    </a>
                   </Button>
                 </div>
               </div>

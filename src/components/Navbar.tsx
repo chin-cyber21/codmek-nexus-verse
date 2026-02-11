@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation, Link } from "react-router-dom";
-import { Home, Beaker, GraduationCap, Lightbulb, Network, Palette, Menu, X } from "lucide-react";
+import { Home, Beaker, GraduationCap, Lightbulb, Network, Palette, Menu, X, Mail } from "lucide-react";
 import { Button } from "./ui/button";
+import codmekLogo from "@/assets/codmek-logo-new.jpg";
 
 const navItems = [
   { path: "/", label: "Home", icon: Home },
@@ -17,16 +18,19 @@ const Navbar = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      setIsVisible(scrollY > 100);
+      // Show immediately on non-home pages, after scroll on home
+      setIsVisible(isHomePage ? scrollY > 100 : true);
     };
 
+    handleScroll(); // Run on mount
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isHomePage]);
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -48,6 +52,9 @@ const Navbar = () => {
             className="fixed top-6 left-1/2 -translate-x-1/2 z-50 hidden md:block"
           >
             <div className="glass-panel rounded-full px-2 py-2 flex items-center gap-1 border border-primary/20 shadow-2xl">
+              <Link to="/" className="mr-1">
+                <img src={codmekLogo} alt="Codmek" className="h-7 w-7 rounded-full object-cover" />
+              </Link>
               {navItems.map((item) => {
                 const Icon = item.icon;
                 const active = isActive(item.path);
@@ -78,6 +85,16 @@ const Navbar = () => {
                   </Link>
                 );
               })}
+              <Link to="/contact">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-4 py-2 rounded-full bg-primary text-primary-foreground flex items-center gap-2 text-sm font-medium ml-1 glow-soft"
+                >
+                  <Mail className="h-3.5 w-3.5" />
+                  Contact Us
+                </motion.div>
+              </Link>
             </div>
           </motion.nav>
         )}
@@ -139,6 +156,15 @@ const Navbar = () => {
                     </Link>
                   );
                 })}
+                <Link to="/contact">
+                  <motion.div
+                    whileTap={{ scale: 0.95 }}
+                    className="px-4 py-3 rounded-xl flex items-center gap-3 bg-primary text-primary-foreground font-medium mt-2"
+                  >
+                    <Mail className="h-5 w-5" />
+                    <span>Contact Us</span>
+                  </motion.div>
+                </Link>
               </div>
             </div>
           </motion.div>
