@@ -8,6 +8,7 @@ import { LoadingBanner } from "@/components/LoadingBanner";
 import { Scene3D } from "@/components/Scene3D";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import FAQSection, { faqJsonLd } from "@/components/FAQSection";
 import SEO from "@/components/SEO";
 
 const Home = () => {
@@ -318,6 +319,15 @@ const Home = () => {
           })}
         </div>
       </motion.main>
+
+      {/* FAQ Section */}
+      <FAQSection />
+
+      {/* FAQ JSON-LD for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
 
       {/* Footer */}
       <Footer />
