@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useLocation, Link } from "react-router-dom";
 import { Home, Beaker, GraduationCap, Lightbulb, Network, Palette, Menu, X, Mail } from "lucide-react";
 import { Button } from "./ui/button";
-import codmekLogo from "@/assets/codmek-logo-new.jpg";
+import codmekLogo from "@/assets/codmek-icon.png";
 
 const navItems = [
   { path: "/", label: "Home", icon: Home },
