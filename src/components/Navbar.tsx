@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation, Link } from "react-router-dom";
-import { Home, Beaker, GraduationCap, Lightbulb, Network, Palette, Menu, X, Mail } from "lucide-react";
+import { Home, Beaker, GraduationCap, Lightbulb, Network, Palette, Menu, X, Mail, BookOpen } from "lucide-react";
 import { Button } from "./ui/button";
 import codmekLogo from "@/assets/codmek-icon.png";
 
@@ -12,6 +12,7 @@ const navItems = [
   { path: "/learn", label: "Learn", icon: GraduationCap },
   { path: "/solutions", label: "Solutions", icon: Lightbulb },
   { path: "/nexus", label: "Nexus", icon: Network },
+  { path: "/blog", label: "Blog", icon: BookOpen },
 ];
 
 const Navbar = () => {
