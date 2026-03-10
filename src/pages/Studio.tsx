@@ -12,6 +12,22 @@ const Index = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [selectedPod, setSelectedPod] = useState<string | null>(null);
   const [hoveredPod, setHoveredPod] = useState<string | null>(null);
+  const [showOnboarding, setShowOnboarding] = useState(false);
+
+  useEffect(() => {
+    if (!isLoading) {
+      const seen = localStorage.getItem("codmek-studio-onboarded");
+      if (!seen) {
+        const timer = setTimeout(() => setShowOnboarding(true), 2000);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [isLoading]);
+
+  const dismissOnboarding = () => {
+    setShowOnboarding(false);
+    localStorage.setItem("codmek-studio-onboarded", "true");
+  };
 
   const handlePodClick = (podName: string) => {
     if (podName === "Reception") {
