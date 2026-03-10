@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { MousePointerClick } from "lucide-react";
 import LoadingScreen from "@/components/LoadingScreen";
 import Studio3D from "@/components/Studio3D";
 import HUD from "@/components/HUD";
@@ -11,6 +12,22 @@ const Index = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [selectedPod, setSelectedPod] = useState<string | null>(null);
   const [hoveredPod, setHoveredPod] = useState<string | null>(null);
+  const [showOnboarding, setShowOnboarding] = useState(false);
+
+  useEffect(() => {
+    if (!isLoading) {
+      const seen = localStorage.getItem("codmek-studio-onboarded");
+      if (!seen) {
+        const timer = setTimeout(() => setShowOnboarding(true), 2000);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [isLoading]);
+
+  const dismissOnboarding = () => {
+    setShowOnboarding(false);
+    localStorage.setItem("codmek-studio-onboarded", "true");
+  };
 
   const handlePodClick = (podName: string) => {
     if (podName === "Reception") {
@@ -39,6 +56,24 @@ const Index = () => {
 
           {/* Pod Info Overlay */}
           <PodOverlay podName={selectedPod} onClose={() => setSelectedPod(null)} />
+
+          {/* Onboarding Tooltip */}
+          <AnimatePresence>
+            {showOnboarding && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                onClick={dismissOnboarding}
+                className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 cursor-pointer"
+              >
+                <div className="glass-panel rounded-2xl px-8 py-5 flex items-center gap-4 glow-soft animate-pulse-glow">
+                  <MousePointerClick className="h-6 w-6 text-primary" />
+                  <span className="text-sm font-medium text-foreground">Click any pod to explore</span>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </>
       )}
     </div>

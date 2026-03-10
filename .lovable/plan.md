@@ -1,31 +1,53 @@
 
 
-## Plan: Improve Studio 3D Experience
+# Next Level Improvements for Codmek Website
 
-### 1. Floating Pod Labels (Studio3D.tsx)
-Add `Html` from `@react-three/drei` to render floating labels above each pod. Labels will be glass-styled, always visible, and glow brighter on hover. Positioned ~1.5 units above each pod.
+## 1. Navbar Enhancement with Logo and Branding
+The current navbar only shows text links. Adding the Codmek logo, making it always visible (not just after scroll), and adding a "Contact Us" CTA button would improve brand presence and conversion.
 
-### 2. Onboarding Tooltip (Studio.tsx)
-Add a first-visit overlay that says "Click any pod to explore" with a subtle pulsing cursor icon. Uses `localStorage` to only show once. Auto-dismisses after 5 seconds or on first click anywhere.
+## 2. Add a Dedicated Contact Page
+Currently there's no `/contact` route. A proper contact page with a form (name, email, subject, message), office location info (Jaipur, India), and all social links would help with lead generation and SEO (ContactPage schema).
 
-### 3. Working "Explore" Navigation (PodOverlay.tsx)
-Wire the "Explore" buttons to navigate to actual routes using `react-router-dom`'s `useNavigate`:
-- **Reception** -- opens chat (already works, no overlay shown)
-- **Research** -- navigates to `/research`
-- **Workshop** -- navigates to `/solutions`
-- **Nexus** -- navigates to `/nexus` (remove "locked" status since page exists)
-- **Learn** -- navigates to `/learn` (remove "locked" status since page exists)
+## 3. Page Transition Animations
+Currently pages load abruptly. Adding smooth fade/slide transitions between routes using framer-motion's AnimatePresence would make navigation feel polished and premium.
 
-### 4. HUD Onboarding Update (HUD.tsx)
-Replace the current "Welcome" message (which just fades out with no guidance) with the onboarding tooltip logic, or keep both -- the welcome fades first, then the "click a pod" hint appears.
+## 4. Fix Non-Functional CTA Buttons
+Several buttons on the site are decorative with no action:
+- "Explore Solutions" and "Schedule Consultation" on Solutions page do nothing
+- "Join the Network", "Learn More", "Get Involved" on Nexus page do nothing
+- These should either scroll to sections, open mailto links, or navigate to a contact page
 
-### Files Changed
-- **Studio3D.tsx** -- import `Html` from drei, add label elements above each pod
-- **PodOverlay.tsx** -- add `useNavigate`, wire buttons to routes, unlock Nexus/Learn
-- **Studio.tsx** -- add onboarding overlay with localStorage check
+## 5. Performance: Lazy Load Pages
+All pages are eagerly imported in App.tsx. Using React.lazy() with Suspense for route-based code splitting would improve initial load time significantly.
 
-### Technical Notes
-- `Html` from drei renders DOM elements inside the 3D canvas, positioned in 3D space but rendered as HTML overlays -- perfect for labels that need to look clean
-- Labels will use `distanceFactor` so they scale naturally with camera distance
-- No new dependencies needed
+---
+
+## Technical Details
+
+### Contact Page (`src/pages/Contact.tsx`)
+- Form fields: Name, Email, Company (optional), Subject dropdown, Message
+- mailto fallback (no backend needed)
+- JSON-LD ContactPage schema
+- Add route in App.tsx and sitemap.xml
+- Add "Contact" to navbar and footer quick links
+
+### Navbar Updates (`src/components/Navbar.tsx`)
+- Add Codmek logo (codmek-logo-new.jpg) to left side
+- Show navbar immediately on non-home pages (currently hidden until scroll > 100px)
+- Add "Contact Us" CTA button with glow effect
+
+### Button Fixes
+- "Schedule Consultation" -> `mailto:contact@codmek.com?subject=Consultation Request`
+- "Explore Solutions" -> smooth scroll to solutions grid section
+- "Join the Network" -> `mailto:contact@codmek.com?subject=Nexus Partnership`
+- Modal "Learn More" / "Get Involved" -> mailto with pre-filled subject
+
+### Lazy Loading (`src/App.tsx`)
+- Wrap each page import with `React.lazy()`
+- Add `Suspense` with a loading fallback around Routes
+
+### Route Addition
+- Add `/contact` route to App.tsx
+- Update sitemap.xml with new contact URL
+- Update footer quick links to include Contact
 

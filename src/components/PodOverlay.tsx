@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Sparkles, Cpu, Wrench, Zap, BookOpen } from "lucide-react";
 import { Button } from "./ui/button";
+import { useNavigate } from "react-router-dom";
 
 interface PodOverlayProps {
   podName: string | null;
@@ -42,7 +43,6 @@ const podContent: Record<string, {
     description: "Collaborate with Codmek. Portal coming soon.",
     features: ["Team Collaboration", "Project Sync", "Resource Sharing"],
     color: "white",
-    locked: true,
   },
   Learn: {
     icon: BookOpen,
@@ -50,14 +50,30 @@ const podContent: Record<string, {
     description: "Learn, Build, and Grow with Codmek.",
     features: ["Interactive Courses", "Code Labs", "Certifications"],
     color: "white",
-    locked: true,
   },
 };
 
+const podRoutes: Record<string, string> = {
+  Research: "/research",
+  Workshop: "/solutions",
+  Nexus: "/nexus",
+  Learn: "/learn",
+};
+
 const PodOverlay = ({ podName, onClose }: PodOverlayProps) => {
+  const navigate = useNavigate();
+
   if (!podName || !(podName in podContent)) return null;
 
   const content = podContent[podName as keyof typeof podContent];
+
+  const handleExplore = () => {
+    const route = podRoutes[podName];
+    if (route) {
+      onClose();
+      navigate(route);
+    }
+  };
   const Icon = content.icon;
   const glowClass = `glow-${content.color}`;
 
@@ -125,15 +141,9 @@ const PodOverlay = ({ podName, onClose }: PodOverlayProps) => {
               </div>
 
               {/* Action Button */}
-              {content.locked ? (
-                <Button className="w-full" disabled>
-                  Coming Soon
-                </Button>
-              ) : (
-                <Button className="w-full bg-primary hover:bg-primary/80">
-                  Explore {content.title}
-                </Button>
-              )}
+              <Button className="w-full bg-primary hover:bg-primary/80" onClick={handleExplore}>
+                Explore {content.title}
+              </Button>
             </div>
           </motion.div>
         </>

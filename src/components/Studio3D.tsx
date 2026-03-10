@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
-import { OrbitControls, Float, Sphere, Box, Octahedron, Dodecahedron } from "@react-three/drei";
+import { OrbitControls, Float, Sphere, Box, Octahedron, Dodecahedron, Html } from "@react-three/drei";
 import * as THREE from "three";
 import { TextureLoader } from "three";
 import codmekLogo from "@/assets/codmek-logo-new.jpg";
@@ -70,6 +70,11 @@ const Pod = ({ position, shape, label, onClick, isHovered, onHover }: PodProps) 
           {renderShape()}
         </mesh>
         <pointLight color="#ffffff" intensity={isHovered ? 1.5 : 0.5} distance={5} />
+        <Html position={[0, 1.5, 0]} center distanceFactor={8} style={{ pointerEvents: 'none' }}>
+          <div className={`px-3 py-1.5 rounded-full glass-panel text-xs font-semibold tracking-wider whitespace-nowrap transition-all duration-300 ${isHovered ? 'glow-white text-primary scale-110' : 'text-muted-foreground'}`}>
+            {label}
+          </div>
+        </Html>
       </group>
     </Float>
   );
