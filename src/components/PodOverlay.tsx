@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Sparkles, Cpu, Wrench, Zap, BookOpen } from "lucide-react";
 import { Button } from "./ui/button";
+import { useNavigate } from "react-router-dom";
 
 interface PodOverlayProps {
   podName: string | null;
