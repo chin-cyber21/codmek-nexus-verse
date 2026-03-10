@@ -56,6 +56,24 @@ const Index = () => {
 
           {/* Pod Info Overlay */}
           <PodOverlay podName={selectedPod} onClose={() => setSelectedPod(null)} />
+
+          {/* Onboarding Tooltip */}
+          <AnimatePresence>
+            {showOnboarding && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                onClick={dismissOnboarding}
+                className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 cursor-pointer"
+              >
+                <div className="glass-panel rounded-2xl px-8 py-5 flex items-center gap-4 glow-soft animate-pulse-glow">
+                  <MousePointerClick className="h-6 w-6 text-primary" />
+                  <span className="text-sm font-medium text-foreground">Click any pod to explore</span>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </>
       )}
     </div>

@@ -141,15 +141,9 @@ const PodOverlay = ({ podName, onClose }: PodOverlayProps) => {
               </div>
 
               {/* Action Button */}
-              {content.locked ? (
-                <Button className="w-full" disabled>
-                  Coming Soon
-                </Button>
-              ) : (
-                <Button className="w-full bg-primary hover:bg-primary/80">
-                  Explore {content.title}
-                </Button>
-              )}
+              <Button className="w-full bg-primary hover:bg-primary/80" onClick={handleExplore}>
+                Explore {content.title}
+              </Button>
             </div>
           </motion.div>
         </>
