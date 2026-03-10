@@ -43,7 +43,6 @@ const podContent: Record<string, {
     description: "Collaborate with Codmek. Portal coming soon.",
     features: ["Team Collaboration", "Project Sync", "Resource Sharing"],
     color: "white",
-    locked: true,
   },
   Learn: {
     icon: BookOpen,
@@ -51,7 +50,6 @@ const podContent: Record<string, {
     description: "Learn, Build, and Grow with Codmek.",
     features: ["Interactive Courses", "Code Labs", "Certifications"],
     color: "white",
-    locked: true,
   },
 };
 
