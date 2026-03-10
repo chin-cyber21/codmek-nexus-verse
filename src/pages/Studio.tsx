@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { MousePointerClick } from "lucide-react";
 import LoadingScreen from "@/components/LoadingScreen";
 import Studio3D from "@/components/Studio3D";
 import HUD from "@/components/HUD";
