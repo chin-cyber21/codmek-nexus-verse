@@ -53,10 +53,27 @@ const podContent: Record<string, {
   },
 };
 
+const podRoutes: Record<string, string> = {
+  Research: "/research",
+  Workshop: "/solutions",
+  Nexus: "/nexus",
+  Learn: "/learn",
+};
+
 const PodOverlay = ({ podName, onClose }: PodOverlayProps) => {
+  const navigate = useNavigate();
+
   if (!podName || !(podName in podContent)) return null;
 
   const content = podContent[podName as keyof typeof podContent];
+
+  const handleExplore = () => {
+    const route = podRoutes[podName];
+    if (route) {
+      onClose();
+      navigate(route);
+    }
+  };
   const Icon = content.icon;
   const glowClass = `glow-${content.color}`;
 
