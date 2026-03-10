@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
-import { OrbitControls, Float, Sphere, Box, Octahedron, Dodecahedron } from "@react-three/drei";
+import { OrbitControls, Float, Sphere, Box, Octahedron, Dodecahedron, Html } from "@react-three/drei";
 import * as THREE from "three";
 import { TextureLoader } from "three";
 import codmekLogo from "@/assets/codmek-logo-new.jpg";
