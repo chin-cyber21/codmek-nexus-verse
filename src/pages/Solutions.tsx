@@ -196,7 +196,8 @@ const Solutions = () => {
                 { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Consulting & Advisory", "description": "AI readiness assessment, architecture design, ethics and compliance" }},
                 { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Robotics & Autonomous Systems", "description": "AI-driven robotics, computer vision, edge AI, mechatronic design" }},
                 { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Data & Cloud Infrastructure", "description": "Cloud hosting, MLOps pipelines, data engineering, cost optimization" }},
-                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Research as a Service (RaaS)", "description": "Outsourced R&D, custom research sprints, white-label AI research" }}
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Research as a Service (RaaS)", "description": "Outsourced R&D, custom research sprints, white-label AI research" }},
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Industrial AI & Digital Transformation", "description": "AI-powered quality inspection, predictive maintenance, computer vision for safety, IoT integration, digital twins for manufacturing, pharma, automotive, and energy" }}
               ]
             }
           },
