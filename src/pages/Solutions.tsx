@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowLeft, Brain, Code, Cog, Zap, Users, Bot, Cloud, ChevronRight, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, Brain, Code, Cog, Zap, Users, Bot, Cloud, Factory, ChevronRight, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
