@@ -92,6 +92,23 @@ const solutions = [
     color: "from-indigo-500/20 to-blue-500/20"
   },
   {
+    id: "industrial-ai",
+    icon: Factory,
+    title: "Industrial AI & Digital Transformation",
+    tagline: "Powering smarter factories, safer sites, and connected industries",
+    capabilities: [
+      "AI-powered quality inspection and defect detection for manufacturing",
+      "Predictive maintenance using sensor fusion and anomaly detection",
+      "Computer vision for workplace safety and compliance monitoring",
+      "Smart supply chain optimization and demand forecasting",
+      "Industrial IoT integration with edge AI inference",
+      "Digital twin development for process simulation",
+      "Automated compliance reporting and operational dashboards",
+      "Industry-specific AI solutions (pharma, automotive, energy, logistics)"
+    ],
+    color: "from-sky-500/20 to-cyan-500/20"
+  },
+  {
     id: "cloud-infra",
     icon: Cloud,
     title: "Data & Cloud Infrastructure",
