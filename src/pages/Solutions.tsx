@@ -219,6 +219,11 @@ const Solutions = () => {
                 "@type": "Question",
                 "name": "Does Codmek work with startups and enterprises?",
                 "acceptedAnswer": { "@type": "Answer", "text": "Yes. Codmek works with startups, SMEs, enterprises, academic institutions, and government bodies worldwide to deploy AI solutions." }
+              },
+              {
+                "@type": "Question",
+                "name": "What industrial AI solutions does Codmek provide?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Codmek delivers Industrial AI & Digital Transformation solutions including AI-powered quality inspection, predictive maintenance, computer vision for workplace safety, smart supply chain optimization, IoT edge AI, digital twins, and industry-specific solutions for pharma, automotive, energy, and logistics." }
               }
             ]
           }
