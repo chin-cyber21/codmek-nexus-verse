@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowLeft, Brain, Code, Cog, Zap, Users, Bot, Cloud, ChevronRight, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, Brain, Code, Cog, Zap, Users, Bot, Cloud, Factory, ChevronRight, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
@@ -92,6 +92,23 @@ const solutions = [
     color: "from-indigo-500/20 to-blue-500/20"
   },
   {
+    id: "industrial-ai",
+    icon: Factory,
+    title: "Industrial AI & Digital Transformation",
+    tagline: "Powering smarter factories, safer sites, and connected industries",
+    capabilities: [
+      "AI-powered quality inspection and defect detection for manufacturing",
+      "Predictive maintenance using sensor fusion and anomaly detection",
+      "Computer vision for workplace safety and compliance monitoring",
+      "Smart supply chain optimization and demand forecasting",
+      "Industrial IoT integration with edge AI inference",
+      "Digital twin development for process simulation",
+      "Automated compliance reporting and operational dashboards",
+      "Industry-specific AI solutions (pharma, automotive, energy, logistics)"
+    ],
+    color: "from-sky-500/20 to-cyan-500/20"
+  },
+  {
     id: "cloud-infra",
     icon: Cloud,
     title: "Data & Cloud Infrastructure",
@@ -179,7 +196,8 @@ const Solutions = () => {
                 { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Consulting & Advisory", "description": "AI readiness assessment, architecture design, ethics and compliance" }},
                 { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Robotics & Autonomous Systems", "description": "AI-driven robotics, computer vision, edge AI, mechatronic design" }},
                 { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Data & Cloud Infrastructure", "description": "Cloud hosting, MLOps pipelines, data engineering, cost optimization" }},
-                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Research as a Service (RaaS)", "description": "Outsourced R&D, custom research sprints, white-label AI research" }}
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Research as a Service (RaaS)", "description": "Outsourced R&D, custom research sprints, white-label AI research" }},
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Industrial AI & Digital Transformation", "description": "AI-powered quality inspection, predictive maintenance, computer vision for safety, IoT integration, digital twins for manufacturing, pharma, automotive, and energy" }}
               ]
             }
           },
@@ -201,6 +219,11 @@ const Solutions = () => {
                 "@type": "Question",
                 "name": "Does Codmek work with startups and enterprises?",
                 "acceptedAnswer": { "@type": "Answer", "text": "Yes. Codmek works with startups, SMEs, enterprises, academic institutions, and government bodies worldwide to deploy AI solutions." }
+              },
+              {
+                "@type": "Question",
+                "name": "What industrial AI solutions does Codmek provide?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Codmek delivers Industrial AI & Digital Transformation solutions including AI-powered quality inspection, predictive maintenance, computer vision for workplace safety, smart supply chain optimization, IoT edge AI, digital twins, and industry-specific solutions for pharma, automotive, energy, and logistics." }
               }
             ]
           }
