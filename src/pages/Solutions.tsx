@@ -169,6 +169,15 @@ const processSteps = [
 
 const Solutions = () => {
   const [selectedSolution, setSelectedSolution] = useState<typeof solutions[0] | null>(null);
+  const navigate = useNavigate();
+
+  const handleSolutionClick = (solution: typeof solutions[0]) => {
+    if (solution.id === "industrial-ai") {
+      navigate("/solutions/industrial-ai");
+    } else {
+      setSelectedSolution(solution);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
