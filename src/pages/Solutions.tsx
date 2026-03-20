@@ -325,7 +325,7 @@ const Solutions = () => {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
                   whileHover={{ scale: 1.02 }}
-                  onClick={() => setSelectedSolution(solution)}
+                  onClick={() => handleSolutionClick(solution)}
                   className="glass-panel p-8 rounded-xl cursor-pointer group relative overflow-hidden"
                 >
                   <div className={`absolute inset-0 bg-gradient-to-br ${solution.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
