@@ -1,53 +1,48 @@
 
 
-# Next Level Improvements for Codmek Website
+# Upgrade: Enterprise Tech Stack + Interactive 3D Hero Animation
 
-## 1. Navbar Enhancement with Logo and Branding
-The current navbar only shows text links. Adding the Codmek logo, making it always visible (not just after scroll), and adding a "Contact Us" CTA button would improve brand presence and conversion.
+## What Changes
 
-## 2. Add a Dedicated Contact Page
-Currently there's no `/contact` route. A proper contact page with a form (name, email, subject, message), office location info (Jaipur, India), and all social links would help with lead generation and SEO (ContactPage schema).
+### 1. Replace the flat tech stack section with enterprise-grade module cards
 
-## 3. Page Transition Animations
-Currently pages load abruptly. Adding smooth fade/slide transitions between routes using framer-motion's AnimatePresence would make navigation feel polished and premium.
+Instead of simple tag pills grouped by category, each technology gets a proper module card showing:
+- Technology name with its official icon/logo character
+- A one-line role description (e.g., "Real-time object detection at 60fps")
+- A subtle proficiency/usage indicator bar
+- Category header rows with connecting lines between them
 
-## 4. Fix Non-Functional CTA Buttons
-Several buttons on the site are decorative with no action:
-- "Explore Solutions" and "Schedule Consultation" on Solutions page do nothing
-- "Join the Network", "Learn More", "Get Involved" on Nexus page do nothing
-- These should either scroll to sections, open mailto links, or navigate to a contact page
+Four categories reorganized as enterprise AI pipeline stages:
+- **Perception** (PyTorch, YOLOv8, OpenCV, Detectron2, TensorFlow, ONNX Runtime)
+- **Edge Inference** (NVIDIA Jetson, Intel OpenVINO, AWS Greengrass, Azure IoT Edge, OPC-UA)
+- **Data Platform** (Apache Kafka, Spark, Databricks, Snowflake, SageMaker, Vertex AI)
+- **Simulation & DevOps** (NVIDIA Omniverse, MATLAB/Simulink, Unity Digital Twin, Terraform IaC)
 
-## 5. Performance: Lazy Load Pages
-All pages are eagerly imported in App.tsx. Using React.lazy() with Suspense for route-based code splitting would improve initial load time significantly.
+Each module card uses glass-panel styling with a hover glow effect. Behind the grid, an animated SVG draws faint connecting lines between pipeline stages (Perception -> Edge -> Data -> Simulation) to show the data flow architecture.
 
----
+### 2. Add an interactive 3D hero scene using React Three Fiber
 
-## Technical Details
+Replace the current CSS-only ray background in the hero with a full `<Canvas>` 3D scene featuring:
 
-### Contact Page (`src/pages/Contact.tsx`)
-- Form fields: Name, Email, Company (optional), Subject dropdown, Message
-- mailto fallback (no backend needed)
-- JSON-LD ContactPage schema
-- Add route in App.tsx and sitemap.xml
-- Add "Contact" to navbar and footer quick links
+- **Wireframe factory/circuit structure** at center — a slowly rotating icosahedron geometry with wireframe material and subtle glow
+- **Orbiting camera rays** — 6-8 thin `<Line>` elements emanating from orbiting points, creating a "multi-camera surveillance" effect that rotates 360 degrees around the central structure
+- **Floating sensor nodes** — small spheres orbiting at different radii and speeds, connected by faint lines to the center (network topology feel)
+- **Particle field** — sparse points using `<Points>` from drei floating in the background for depth
+- **Auto-rotating OrbitControls** — user can grab and rotate the scene; auto-rotates when idle
+- **Scan beam effect** — a translucent plane that sweeps across the structure periodically (like a scanning ray)
 
-### Navbar Updates (`src/components/Navbar.tsx`)
-- Add Codmek logo (codmek-logo-new.jpg) to left side
-- Show navbar immediately on non-home pages (currently hidden until scroll > 100px)
-- Add "Contact Us" CTA button with glow effect
+The scene sits behind the hero text (pointer-events: none on the canvas overlay text). Mobile gets a simplified version (fewer nodes, no particles, lower DPR).
 
-### Button Fixes
-- "Schedule Consultation" -> `mailto:contact@codmek.com?subject=Consultation Request`
-- "Explore Solutions" -> smooth scroll to solutions grid section
-- "Join the Network" -> `mailto:contact@codmek.com?subject=Nexus Partnership`
-- Modal "Learn More" / "Get Involved" -> mailto with pre-filled subject
+### 3. Files changed
 
-### Lazy Loading (`src/App.tsx`)
-- Wrap each page import with `React.lazy()`
-- Add `Suspense` with a loading fallback around Routes
+- `src/pages/IndustrialAI.tsx` — rewrite tech stack section with module cards + animated pipeline SVG; replace hero background with a 3D Canvas scene containing the orbiting camera/ray animation
 
-### Route Addition
-- Add `/contact` route to App.tsx
-- Update sitemap.xml with new contact URL
-- Update footer quick links to include Contact
+### Technical approach
+
+- 3D scene uses `@react-three/fiber` + `@react-three/drei` (already in the project from Studio3D)
+- Orbiting rays use `useFrame` to update positions each frame around a central point
+- The scan beam is a `<mesh>` with `planeGeometry` that oscillates via `useFrame`
+- Connecting lines between sensor nodes use drei's `<Line>` component
+- Tech stack module cards use framer-motion staggered entry + hover scale
+- Pipeline flow SVG uses `<motion.path>` with `pathLength` animation for the draw-on effect
 
