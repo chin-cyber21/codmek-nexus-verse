@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { ArrowLeft, Brain, Code, Cog, Zap, Users, Bot, Cloud, Factory, ChevronRight, CheckCircle2 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
