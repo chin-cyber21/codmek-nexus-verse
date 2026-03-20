@@ -23,6 +23,7 @@ const Nexus = lazy(() => import("./pages/Nexus"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
+const IndustrialAI = lazy(() => import("./pages/IndustrialAI"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
