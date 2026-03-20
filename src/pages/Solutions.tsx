@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { ArrowLeft, Brain, Code, Cog, Zap, Users, Bot, Cloud, Factory, ChevronRight, CheckCircle2 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
@@ -168,6 +169,15 @@ const processSteps = [
 
 const Solutions = () => {
   const [selectedSolution, setSelectedSolution] = useState<typeof solutions[0] | null>(null);
+  const navigate = useNavigate();
+
+  const handleSolutionClick = (solution: typeof solutions[0]) => {
+    if (solution.id === "industrial-ai") {
+      navigate("/solutions/industrial-ai");
+    } else {
+      setSelectedSolution(solution);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -315,7 +325,7 @@ const Solutions = () => {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
                   whileHover={{ scale: 1.02 }}
-                  onClick={() => setSelectedSolution(solution)}
+                  onClick={() => handleSolutionClick(solution)}
                   className="glass-panel p-8 rounded-xl cursor-pointer group relative overflow-hidden"
                 >
                   <div className={`absolute inset-0 bg-gradient-to-br ${solution.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
