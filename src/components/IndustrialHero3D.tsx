@@ -106,7 +106,8 @@ const ScanBeam = () => {
     const t = state.clock.getElapsedTime();
     ref.current.position.x = Math.sin(t * 0.4) * 2.5;
     ref.current.rotation.y = t * 0.3;
-    ref.current.material.opacity = 0.03 + Math.sin(t * 0.8) * 0.02;
+    const mat = ref.current.material as THREE.MeshBasicMaterial;
+    mat.opacity = 0.03 + Math.sin(t * 0.8) * 0.02;
   });
 
   return (
