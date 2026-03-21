@@ -342,64 +342,157 @@ const IndustrialAI = () => {
 
                   {/* Geometric SVG illustration */}
                   <div className="flex-1 flex justify-center">
-                    <div className="w-full max-w-sm aspect-square glass-panel rounded-2xl flex items-center justify-center relative overflow-hidden">
+                    <div className="w-full max-w-sm aspect-square glass-panel rounded-2xl flex items-center justify-center relative overflow-hidden group/card">
                       <div className="absolute inset-0 bg-gradient-to-br from-foreground/[0.03] to-transparent" />
-                      <svg viewBox="0 0 200 200" className="w-3/4 h-3/4 opacity-20">
+                      <div className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-700 bg-[radial-gradient(circle_at_center,hsl(var(--foreground)/0.06)_0%,transparent_70%)]" />
+                      <svg viewBox="0 0 200 200" className="w-3/4 h-3/4">
+                        <defs>
+                          <filter id={`glow-${i}`}>
+                            <feGaussianBlur stdDeviation="2" result="blur" />
+                            <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+                          </filter>
+                          <linearGradient id={`grad-${i}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="currentColor" stopOpacity="0.4" />
+                            <stop offset="100%" stopColor="currentColor" stopOpacity="0.05" />
+                          </linearGradient>
+                        </defs>
+
+                        {/* Dot grid background */}
+                        {Array.from({ length: 7 }).map((_, row) =>
+                          Array.from({ length: 7 }).map((_, col) => (
+                            <circle key={`dot-${row}-${col}`} cx={32 + col * 22.6} cy={32 + row * 22.6} r="0.6" fill="currentColor" opacity="0.08" />
+                          ))
+                        )}
+
                         {i === 0 && (
-                          /* Scanning beam pattern */
                           <g>
-                            <rect x="40" y="40" width="120" height="120" rx="4" stroke="currentColor" strokeWidth="0.5" fill="none" />
-                            <line x1="100" y1="30" x2="100" y2="170" stroke="currentColor" strokeWidth="0.3" strokeDasharray="2 2">
-                              <animate attributeName="x1" values="40;160;40" dur="3s" repeatCount="indefinite" />
-                              <animate attributeName="x2" values="40;160;40" dur="3s" repeatCount="indefinite" />
+                            <rect x="35" y="35" width="130" height="130" rx="6" stroke="currentColor" strokeWidth="0.4" fill="none" opacity="0.15" />
+                            <rect x="50" y="50" width="100" height="100" rx="3" stroke="currentColor" strokeWidth="0.6" fill="none" opacity="0.25" />
+                            {[0,1,2,3].map(r => [0,1,2,3].map(c => (
+                              <rect key={`cell-${r}-${c}`} x={52+c*24} y={52+r*24} width="22" height="22" stroke="currentColor" strokeWidth="0.3" fill="none" opacity="0.12" />
+                            )))}
+                            <line x1="50" y1="50" x2="50" y2="150" stroke="currentColor" strokeWidth="1.5" opacity="0.5" filter={`url(#glow-${i})`}>
+                              <animate attributeName="x1" values="50;150;50" dur="2.5s" repeatCount="indefinite" />
+                              <animate attributeName="x2" values="50;150;50" dur="2.5s" repeatCount="indefinite" />
                             </line>
-                            {[60, 80, 100, 120, 140].map((y) => (
-                              <line key={y} x1="40" y1={y} x2="160" y2={y} stroke="currentColor" strokeWidth="0.2" />
+                            <rect x="76" y="76" width="22" height="22" rx="2" stroke="currentColor" strokeWidth="0.8" fill={`url(#grad-${i})`} opacity="0.4">
+                              <animate attributeName="opacity" values="0.1;0.5;0.1" dur="2s" repeatCount="indefinite" />
+                            </rect>
+                            <rect x="100" y="100" width="22" height="22" rx="2" stroke="currentColor" strokeWidth="0.8" fill={`url(#grad-${i})`} opacity="0.3">
+                              <animate attributeName="opacity" values="0.4;0.1;0.4" dur="2.3s" repeatCount="indefinite" />
+                            </rect>
+                            {[[50,50],[148,50],[50,148],[148,148]].map(([cx,cy],idx) => (
+                              <g key={`corner-${idx}`}>
+                                <circle cx={cx} cy={cy} r="3" stroke="currentColor" strokeWidth="0.6" fill="none" opacity="0.4" />
+                                <circle cx={cx} cy={cy} r="1" fill="currentColor" opacity="0.5">
+                                  <animate attributeName="opacity" values="0.3;0.8;0.3" dur="1.5s" begin={`${idx*0.3}s`} repeatCount="indefinite" />
+                                </circle>
+                              </g>
                             ))}
+                            <line x1="160" y1="60" x2="185" y2="60" stroke="currentColor" strokeWidth="0.4" opacity="0.25" />
+                            <line x1="160" y1="80" x2="178" y2="80" stroke="currentColor" strokeWidth="0.4" opacity="0.2" />
+                            <line x1="160" y1="100" x2="182" y2="100" stroke="currentColor" strokeWidth="0.4" opacity="0.15" />
                           </g>
                         )}
+
                         {i === 1 && (
-                          /* Waveform with anomaly */
                           <g>
-                            <path
-                              d="M20,100 Q50,60 80,100 Q95,130 100,80 Q105,30 110,100 Q140,140 170,100 Q185,80 200,100"
-                              stroke="currentColor"
-                              strokeWidth="0.8"
-                              fill="none"
-                            />
-                            <circle cx="100" cy="80" r="12" stroke="currentColor" strokeWidth="0.5" fill="none" strokeDasharray="2 1" />
-                            {[40, 70, 130, 160].map((x) => (
-                              <line key={x} x1={x} y1="90" x2={x} y2="110" stroke="currentColor" strokeWidth="0.3" />
+                            <path d="M15,120 Q35,100 55,120 Q75,140 95,100 Q105,60 115,100 Q135,140 155,120 Q175,100 195,120" stroke="currentColor" strokeWidth="1" fill="none" opacity="0.35" />
+                            <path d="M15,110 Q40,90 65,110 Q85,130 100,90 Q110,50 120,95 Q140,130 165,110 Q180,95 195,110" stroke="currentColor" strokeWidth="0.5" fill="none" opacity="0.15" />
+                            <circle cx="107" cy="70" r="18" stroke="currentColor" strokeWidth="0.6" fill="none" opacity="0.3" strokeDasharray="3 2">
+                              <animate attributeName="r" values="16;22;16" dur="2s" repeatCount="indefinite" />
+                              <animate attributeName="opacity" values="0.15;0.45;0.15" dur="2s" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="107" cy="70" r="6" stroke="currentColor" strokeWidth="0.8" fill="none" opacity="0.5">
+                              <animate attributeName="opacity" values="0.3;0.7;0.3" dur="1.5s" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="107" cy="70" r="2" fill="currentColor" opacity="0.6">
+                              <animate attributeName="opacity" values="0.4;1;0.4" dur="1s" repeatCount="indefinite" />
+                            </circle>
+                            {[30,50,70,90,110,130,150,170].map((x,idx) => (
+                              <line key={`bar-${idx}`} x1={x} y1="160" x2={x} y2={145-idx*2} stroke="currentColor" strokeWidth="2" opacity="0.12" strokeLinecap="round">
+                                <animate attributeName="y2" values={`${145-idx*2};${135-idx*3};${145-idx*2}`} dur={`${1.5+idx*0.2}s`} repeatCount="indefinite" />
+                              </line>
+                            ))}
+                            <line x1="15" y1="85" x2="195" y2="85" stroke="currentColor" strokeWidth="0.3" strokeDasharray="6 3" opacity="0.15" />
+                            <text x="18" y="82" fill="currentColor" fontSize="5" opacity="0.2" fontFamily="monospace">THRESHOLD</text>
+                            {[35,75,115,155].map((x,idx) => (
+                              <circle key={`sensor-${idx}`} cx={x} cy={idx===2?95:120} r="2.5" stroke="currentColor" strokeWidth="0.5" fill="none" opacity="0.3">
+                                <animate attributeName="opacity" values="0.2;0.5;0.2" dur="2s" begin={`${idx*0.4}s`} repeatCount="indefinite" />
+                              </circle>
                             ))}
                           </g>
                         )}
+
                         {i === 2 && (
-                          /* Network topology */
                           <g>
-                            <circle cx="100" cy="100" r="8" stroke="currentColor" strokeWidth="0.8" fill="none" />
-                            {[0, 60, 120, 180, 240, 300].map((deg) => {
-                              const r = 50;
-                              const x = 100 + r * Math.cos((deg * Math.PI) / 180);
-                              const y = 100 + r * Math.sin((deg * Math.PI) / 180);
-                              return (
-                                <g key={deg}>
-                                  <line x1="100" y1="100" x2={x} y2={y} stroke="currentColor" strokeWidth="0.3" />
-                                  <circle cx={x} cy={y} r="4" stroke="currentColor" strokeWidth="0.5" fill="none" />
-                                </g>
-                              );
+                            <circle cx="100" cy="100" r="12" stroke="currentColor" strokeWidth="0.8" fill="none" opacity="0.35" />
+                            <circle cx="100" cy="100" r="6" stroke="currentColor" strokeWidth="0.5" fill="none" opacity="0.25" />
+                            <circle cx="100" cy="100" r="2.5" fill="currentColor" opacity="0.4">
+                              <animate attributeName="opacity" values="0.3;0.7;0.3" dur="2s" repeatCount="indefinite" />
+                            </circle>
+                            <line x1="88" y1="100" x2="112" y2="100" stroke="currentColor" strokeWidth="0.3" opacity="0.2" />
+                            <line x1="100" y1="88" x2="100" y2="112" stroke="currentColor" strokeWidth="0.3" opacity="0.2" />
+                            {[0,72,144,216,288].map((deg,idx) => {
+                              const r1=42; const x=100+r1*Math.cos(deg*Math.PI/180); const y=100+r1*Math.sin(deg*Math.PI/180);
+                              return (<g key={`n1-${idx}`}>
+                                <line x1="100" y1="100" x2={x} y2={y} stroke="currentColor" strokeWidth="0.4" opacity="0.2">
+                                  <animate attributeName="opacity" values="0.1;0.35;0.1" dur="3s" begin={`${idx*0.5}s`} repeatCount="indefinite" />
+                                </line>
+                                <circle cx={x} cy={y} r="5" stroke="currentColor" strokeWidth="0.6" fill="none" opacity="0.3" />
+                                <circle cx={x} cy={y} r="1.8" fill="currentColor" opacity="0.35">
+                                  <animate attributeName="opacity" values="0.2;0.6;0.2" dur="2s" begin={`${idx*0.3}s`} repeatCount="indefinite" />
+                                </circle>
+                              </g>);
                             })}
+                            {[30,90,150,210,270,330].map((deg,idx) => {
+                              const r2=70; const x=100+r2*Math.cos(deg*Math.PI/180); const y=100+r2*Math.sin(deg*Math.PI/180);
+                              const pd=[0,72,144,216,288][idx%5]; const px=100+42*Math.cos(pd*Math.PI/180); const py=100+42*Math.sin(pd*Math.PI/180);
+                              return (<g key={`n2-${idx}`}>
+                                <line x1={px} y1={py} x2={x} y2={y} stroke="currentColor" strokeWidth="0.25" opacity="0.1" strokeDasharray="2 2" />
+                                <circle cx={x} cy={y} r="3" stroke="currentColor" strokeWidth="0.4" fill="none" opacity="0.2" />
+                                <circle cx={x} cy={y} r="1" fill="currentColor" opacity="0.25" />
+                              </g>);
+                            })}
+                            <circle cx="100" cy="100" r="42" stroke="currentColor" strokeWidth="0.25" fill="none" opacity="0.08" strokeDasharray="4 3" />
+                            <circle cx="100" cy="100" r="70" stroke="currentColor" strokeWidth="0.2" fill="none" opacity="0.05" strokeDasharray="2 4" />
+                            <circle r="2" fill="currentColor" opacity="0.6" filter={`url(#glow-${i})`}>
+                              <animateMotion dur="3s" repeatCount="indefinite" path="M100,100 L142,100 L131,140 L69,140 L58,100 L100,58 Z" />
+                            </circle>
                           </g>
                         )}
+
                         {i === 3 && (
-                          /* Mirrored wireframe (digital twin) */
                           <g>
-                            <line x1="100" y1="20" x2="100" y2="180" stroke="currentColor" strokeWidth="0.3" strokeDasharray="3 3" />
-                            <polygon points="60,60 90,40 90,80" stroke="currentColor" strokeWidth="0.5" fill="none" />
-                            <polygon points="60,100 90,80 90,120" stroke="currentColor" strokeWidth="0.5" fill="none" />
-                            <polygon points="60,140 90,120 90,160" stroke="currentColor" strokeWidth="0.5" fill="none" />
-                            <polygon points="140,60 110,40 110,80" stroke="currentColor" strokeWidth="0.5" fill="none" opacity="0.5" />
-                            <polygon points="140,100 110,80 110,120" stroke="currentColor" strokeWidth="0.5" fill="none" opacity="0.5" />
-                            <polygon points="140,140 110,120 110,160" stroke="currentColor" strokeWidth="0.5" fill="none" opacity="0.5" />
+                            <line x1="100" y1="20" x2="100" y2="180" stroke="currentColor" strokeWidth="0.4" strokeDasharray="4 3" opacity="0.15" />
+                            <polygon points="50,55 85,40 85,80" stroke="currentColor" strokeWidth="0.6" fill="none" opacity="0.3" />
+                            <polygon points="50,95 85,80 85,120" stroke="currentColor" strokeWidth="0.6" fill="none" opacity="0.3" />
+                            <polygon points="50,135 85,120 85,160" stroke="currentColor" strokeWidth="0.6" fill="none" opacity="0.3" />
+                            <line x1="50" y1="55" x2="50" y2="135" stroke="currentColor" strokeWidth="0.4" opacity="0.2" />
+                            <line x1="85" y1="40" x2="85" y2="160" stroke="currentColor" strokeWidth="0.4" opacity="0.2" />
+                            <polygon points="150,55 115,40 115,80" stroke="currentColor" strokeWidth="0.5" fill="none" opacity="0.15">
+                              <animate attributeName="opacity" values="0.1;0.25;0.1" dur="3s" repeatCount="indefinite" />
+                            </polygon>
+                            <polygon points="150,95 115,80 115,120" stroke="currentColor" strokeWidth="0.5" fill="none" opacity="0.15">
+                              <animate attributeName="opacity" values="0.1;0.25;0.1" dur="3s" begin="0.3s" repeatCount="indefinite" />
+                            </polygon>
+                            <polygon points="150,135 115,120 115,160" stroke="currentColor" strokeWidth="0.5" fill="none" opacity="0.15">
+                              <animate attributeName="opacity" values="0.1;0.25;0.1" dur="3s" begin="0.6s" repeatCount="indefinite" />
+                            </polygon>
+                            <line x1="150" y1="55" x2="150" y2="135" stroke="currentColor" strokeWidth="0.3" opacity="0.1" />
+                            <line x1="115" y1="40" x2="115" y2="160" stroke="currentColor" strokeWidth="0.3" opacity="0.1" />
+                            {[60,100,140].map((y,idx) => (
+                              <g key={`sync-${idx}`}>
+                                <line x1="86" y1={y} x2="114" y2={y} stroke="currentColor" strokeWidth="0.3" opacity="0.15" strokeDasharray="2 2" />
+                                <circle r="1.5" fill="currentColor" opacity="0.5">
+                                  <animateMotion dur={`${2+idx*0.5}s`} repeatCount="indefinite" path={`M86,${y} L114,${y}`} />
+                                </circle>
+                              </g>
+                            ))}
+                            <text x="55" y="175" fill="currentColor" fontSize="5" opacity="0.15" fontFamily="monospace">PHYSICAL</text>
+                            <text x="118" y="175" fill="currentColor" fontSize="5" opacity="0.15" fontFamily="monospace">DIGITAL</text>
+                            <path d="M40,30 Q100,10 160,30" stroke="currentColor" strokeWidth="0.3" fill="none" opacity="0.08" />
+                            <path d="M40,170 Q100,190 160,170" stroke="currentColor" strokeWidth="0.3" fill="none" opacity="0.08" />
                           </g>
                         )}
                       </svg>
