@@ -1,52 +1,11 @@
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import { Line, Points, PointMaterial, OrbitControls } from "@react-three/drei";
+import { Points, PointMaterial, OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 
-/* ─── Orbiting Camera Ray ─── */
-const OrbitingRay = ({ index, total }: { index: number; total: number }) => {
-  const ref = useRef<THREE.Group>(null);
-  const angle = (index / total) * Math.PI * 2;
-  const radius = 3.2;
-  const speed = 0.15 + index * 0.02;
-
-  useFrame((state) => {
-    if (!ref.current) return;
-    const t = state.clock.getElapsedTime() * speed + angle;
-    ref.current.position.set(
-      Math.cos(t) * radius,
-      Math.sin(t * 0.6) * 1.2,
-      Math.sin(t) * radius
-    );
-    ref.current.lookAt(0, 0, 0);
-  });
-
-  return (
-    <group ref={ref}>
-      {/* Camera node */}
-      <mesh>
-        <boxGeometry args={[0.12, 0.08, 0.08]} />
-        <meshBasicMaterial color="#ffffff" transparent opacity={0.6} />
-      </mesh>
-      {/* Ray line to center */}
-      <Line
-        points={[
-          [0, 0, 0],
-          [-ref.current?.position.x || 0, -ref.current?.position.y || 0, -ref.current?.position.z || 0],
-        ]}
-        color="#ffffff"
-        lineWidth={0.5}
-        transparent
-        opacity={0.08}
-      />
-    </group>
-  );
-};
-
-/* ─── Orbiting Ray with dynamic line ─── */
+/* ─── Orbiting Ray with state-based position ─── */
 const DynamicRay = ({ index, total }: { index: number; total: number }) => {
   const groupRef = useRef<THREE.Group>(null);
-  const lineRef = useRef<any>(null);
   const angle = (index / total) * Math.PI * 2;
   const radius = 3.0 + (index % 3) * 0.5;
   const speed = 0.12 + index * 0.025;
@@ -111,7 +70,7 @@ const ScanBeam = () => {
   });
 
   return (
-    <mesh ref={ref as any}>
+    <mesh ref={ref}>
       <planeGeometry args={[0.08, 6]} />
       <meshBasicMaterial
         color="#ffffff"
@@ -123,16 +82,9 @@ const ScanBeam = () => {
   );
 };
 
-/* ─── Connecting Lines from center to rays ─── */
+/* ─── Connecting Lines from center to rays (state-based, no ref reading in JSX) ─── */
 const ConnectionLines = ({ count }: { count: number }) => {
   const linesRef = useRef<THREE.Group>(null);
-  const positions = useMemo(() => {
-    return Array.from({ length: count }, (_, i) => {
-      const angle = (i / count) * Math.PI * 2;
-      const r = 3.0 + (i % 3) * 0.5;
-      return new THREE.Vector3(Math.cos(angle) * r, 0, Math.sin(angle) * r);
-    });
-  }, [count]);
 
   useFrame((state) => {
     if (!linesRef.current) return;
@@ -156,7 +108,7 @@ const ConnectionLines = ({ count }: { count: number }) => {
 
   return (
     <group ref={linesRef}>
-      {positions.map((_, i) => (
+      {Array.from({ length: count }, (_, i) => (
         <line key={i}>
           <bufferGeometry>
             <bufferAttribute
