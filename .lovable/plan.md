@@ -1,48 +1,38 @@
 
 
-# Upgrade: Enterprise Tech Stack + Interactive 3D Hero Animation
+# Codmek Learn -- Full Launch Page
 
-## What Changes
+## Bug Fix (Priority)
+Fix `IndustrialHero3D.tsx` runtime error -- the `Line` component reads `ref.current` before mount. Replace with state-based position tracking.
 
-### 1. Replace the flat tech stack section with enterprise-grade module cards
+## Course Categories
 
-Instead of simple tag pills grouped by category, each technology gets a proper module card showing:
-- Technology name with its official icon/logo character
-- A one-line role description (e.g., "Real-time object detection at 60fps")
-- A subtle proficiency/usage indicator bar
-- Category header rows with connecting lines between them
+1. **Young Engineer** -- For school students (Class 4-12). From curiosity to building real AI-powered apps. Age-appropriate progression: visual coding and robotics for juniors (4-7), Python and projects for middle school (8-10), advanced AI and production apps for seniors (11-12).
 
-Four categories reorganized as enterprise AI pipeline stages:
-- **Perception** (PyTorch, YOLOv8, OpenCV, Detectron2, TensorFlow, ONNX Runtime)
-- **Edge Inference** (NVIDIA Jetson, Intel OpenVINO, AWS Greengrass, Azure IoT Edge, OPC-UA)
-- **Data Platform** (Apache Kafka, Spark, Databricks, Snowflake, SageMaker, Vertex AI)
-- **Simulation & DevOps** (NVIDIA Omniverse, MATLAB/Simulink, Unity Digital Twin, Terraform IaC)
+2. **Catalyst** -- School-to-college bridge (Class 11 through undergraduate). CS fundamentals, DSA, full-stack, ML foundations, placement prep.
 
-Each module card uses glass-panel styling with a hover glow effect. Behind the grid, an animated SVG draws faint connecting lines between pipeline stages (Perception -> Edge -> Data -> Simulation) to show the data flow architecture.
+3. **Engineer's Engineer** -- Working professionals. Personalized 1-on-1 mentoring for technical leadership. Custom curriculum, limited seats, premium.
 
-### 2. Add an interactive 3D hero scene using React Three Fiber
+All three: live mentoring, peer-to-peer, live classes.
 
-Replace the current CSS-only ray background in the hero with a full `<Canvas>` 3D scene featuring:
+## Page Sections
 
-- **Wireframe factory/circuit structure** at center — a slowly rotating icosahedron geometry with wireframe material and subtle glow
-- **Orbiting camera rays** — 6-8 thin `<Line>` elements emanating from orbiting points, creating a "multi-camera surveillance" effect that rotates 360 degrees around the central structure
-- **Floating sensor nodes** — small spheres orbiting at different radii and speeds, connected by faint lines to the center (network topology feel)
-- **Particle field** — sparse points using `<Points>` from drei floating in the background for depth
-- **Auto-rotating OrbitControls** — user can grab and rotate the scene; auto-rotates when idle
-- **Scan beam effect** — a translucent plane that sweeps across the structure periodically (like a scanning ray)
+1. **Hero** -- "Learn to Build What Doesn't Exist Yet" + animated knowledge-grid SVG background + trust badges (Live Classes, 1-on-1 Mentoring, Real Projects, Career Support) + two CTAs
+2. **Three Program Cards** -- Large glass-panel cards per tier with target audience, duration, key modules, delivery format, CTA. "B2B & Colleges -- Coming Soon" badge.
+3. **USP Strip** -- 4 differentiators: Live Mentoring, Peer-to-Peer, Project-First, Career Trajectory
+4. **Curriculum Deep-Dive** -- Tab-based. Young Engineer shows 3 age bands (4-7, 8-10, 11-12) with progressive modules. Catalyst: 8 modules. Engineer's Engineer: custom pathway.
+5. **Process Timeline** -- Apply -> Get Matched -> Learn Live -> Build & Launch
+6. **Mentorship Promise** -- Quote + key stats
+7. **CTA Section** -- "Start Your Journey" with program selector
 
-The scene sits behind the hero text (pointer-events: none on the canvas overlay text). Mobile gets a simplified version (fewer nodes, no particles, lower DPR).
+## Files Changed
+- `src/pages/Learn.tsx` -- complete rewrite
+- `src/components/IndustrialHero3D.tsx` -- fix Line ref bug
 
-### 3. Files changed
-
-- `src/pages/IndustrialAI.tsx` — rewrite tech stack section with module cards + animated pipeline SVG; replace hero background with a 3D Canvas scene containing the orbiting camera/ray animation
-
-### Technical approach
-
-- 3D scene uses `@react-three/fiber` + `@react-three/drei` (already in the project from Studio3D)
-- Orbiting rays use `useFrame` to update positions each frame around a central point
-- The scan beam is a `<mesh>` with `planeGeometry` that oscillates via `useFrame`
-- Connecting lines between sensor nodes use drei's `<Line>` component
-- Tech stack module cards use framer-motion staggered entry + hover scale
-- Pipeline flow SVG uses `<motion.path>` with `pathLength` animation for the draw-on effect
+## Technical Approach
+- Existing glass-panel, holographic-text, Codmek design tokens
+- framer-motion animations (stagger, whileInView, whileHover)
+- useState tabs for curriculum
+- Course schema JSON-LD for SEO
+- Mobile responsive
 
