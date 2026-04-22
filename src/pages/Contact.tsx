@@ -70,8 +70,10 @@ const Contact = () => {
             "email": "contact@codmek.com",
             "address": {
               "@type": "PostalAddress",
+              "streetAddress": "C-5, Green Park, Badh Chela, Jagatpura",
               "addressLocality": "Jaipur",
               "addressRegion": "Rajasthan",
+              "postalCode": "302017",
               "addressCountry": "IN"
             },
             "contactPoint": {
