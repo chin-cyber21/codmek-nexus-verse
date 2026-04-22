@@ -182,21 +182,22 @@ const Contact = () => {
                     <Mail className="w-5 h-5 text-primary/70 mt-1 flex-shrink-0" />
                     <div>
                       <p className="font-medium">Email</p>
-                      <a href="mailto:contact@codmek.com" className="text-foreground/60 hover:text-foreground transition-colors text-sm">contact@codmek.com</a>
+                      <a href="mailto:contact@codmek.com" className="block text-foreground/60 hover:text-foreground transition-colors text-sm">contact@codmek.com</a>
+                      <a href="mailto:business@codmek.com" className="block text-foreground/60 hover:text-foreground transition-colors text-sm">business@codmek.com</a>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
                     <MapPin className="w-5 h-5 text-primary/70 mt-1 flex-shrink-0" />
                     <div>
                       <p className="font-medium">Location</p>
-                      <p className="text-foreground/60 text-sm">Jaipur, Rajasthan, India</p>
+                      <p className="text-foreground/60 text-sm">C-5, Green Park, Badh Chela, Jagatpura, Jaipur – 302017, Rajasthan, India</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
                     <Building2 className="w-5 h-5 text-primary/70 mt-1 flex-shrink-0" />
                     <div>
                       <p className="font-medium">Working Hours</p>
-                      <p className="text-foreground/60 text-sm">Mon–Sat, 10 AM – 7 PM IST</p>
+                      <p className="text-foreground/60 text-sm">Mon–Fri, 10 AM – 7 PM IST</p>
                     </div>
                   </div>
                 </div>
