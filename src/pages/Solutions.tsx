@@ -323,10 +323,19 @@ const Solutions = () => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
+                  transition={{ delay: index * 0.05 }}
                   whileHover={{ scale: 1.02 }}
                   onClick={() => handleSolutionClick(solution)}
-                  className="glass-panel p-8 rounded-xl cursor-pointer group relative overflow-hidden"
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      handleSolutionClick(solution);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Open details for ${solution.title}`}
+                  className="glass-panel p-8 rounded-xl cursor-pointer group relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   <div className={`absolute inset-0 bg-gradient-to-br ${solution.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
                   
