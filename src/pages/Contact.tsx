@@ -190,9 +190,32 @@ const Contact = () => {
                   </div>
                   <div className="flex items-start gap-4">
                     <MapPin className="w-5 h-5 text-primary/70 mt-1 flex-shrink-0" />
-                    <div>
+                    <div className="flex-1 min-w-0">
                       <p className="font-medium">Location</p>
                       <p className="text-foreground/60 text-sm">C-5, Green Park, Badh Chela, Jagatpura, Jaipur – 302017, Rajasthan, India</p>
+
+                      <a
+                        href="https://www.google.com/maps/search/?api=1&query=C-5%20Green%20Park%20Badh%20Chela%20Jagatpura%20Jaipur%20302017"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Open Codmek Softech HQ in Google Maps"
+                        className="group relative mt-4 block rounded-xl overflow-hidden border border-primary/20 hover:border-primary/50 transition-colors"
+                      >
+                        <div className="relative w-full aspect-[16/10] sm:aspect-[16/9]">
+                          <iframe
+                            title="Codmek Softech HQ — Jaipur"
+                            src="https://www.google.com/maps?q=C-5%20Green%20Park%20Badh%20Chela%20Jagatpura%20Jaipur%20302017&output=embed"
+                            className="absolute inset-0 w-full h-full pointer-events-none"
+                            style={{ border: 0 }}
+                            loading="lazy"
+                            referrerPolicy="no-referrer-when-downgrade"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                          <div className="absolute bottom-2 right-2 px-3 py-1.5 rounded-md bg-background/80 backdrop-blur-sm border border-primary/30 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                            Get Directions →
+                          </div>
+                        </div>
+                      </a>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
@@ -224,19 +247,6 @@ const Contact = () => {
                 <p className="text-foreground/60 text-sm leading-relaxed">
                   We typically respond within 24 hours. For urgent inquiries, reach out directly via email.
                 </p>
-              </div>
-
-              <div className="glass-panel p-2 rounded-2xl border border-primary/20 overflow-hidden">
-                <iframe
-                  title="Codmek Softech HQ — Jaipur"
-                  src="https://www.google.com/maps?q=C-5%20Green%20Park%20Badh%20Chela%20Jagatpura%20Jaipur%20302017&output=embed"
-                  width="100%"
-                  height="260"
-                  style={{ border: 0, borderRadius: "0.75rem" }}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  allowFullScreen
-                />
               </div>
             </motion.div>
           </div>
