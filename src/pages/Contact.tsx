@@ -225,6 +225,19 @@ const Contact = () => {
                   We typically respond within 24 hours. For urgent inquiries, reach out directly via email.
                 </p>
               </div>
+
+              <div className="glass-panel p-2 rounded-2xl border border-primary/20 overflow-hidden">
+                <iframe
+                  title="Codmek Softech HQ — Jaipur"
+                  src="https://www.google.com/maps?q=C-5%20Green%20Park%20Badh%20Chela%20Jagatpura%20Jaipur%20302017&output=embed"
+                  width="100%"
+                  height="260"
+                  style={{ border: 0, borderRadius: "0.75rem" }}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
+                />
+              </div>
             </motion.div>
           </div>
         </div>
