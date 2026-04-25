@@ -256,7 +256,7 @@ const Solutions = () => {
           }} />
         </div>
 
-        <div className="relative z-10 container mx-auto px-8 text-center">
+        <div className="relative z-10 container mx-auto px-6 md:px-8 text-center">
           <Link to="/" className="inline-flex items-center gap-2 text-foreground/60 hover:text-foreground transition-colors mb-12">
             <ArrowLeft className="w-4 h-4" />
             Back to Home
@@ -300,7 +300,7 @@ const Solutions = () => {
       </section>
 
       {/* Solutions Grid */}
-      <section id="solutions-grid" className="py-24 px-8">
+      <section id="solutions-grid" className="py-24 px-6 md:px-8">
         <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -365,7 +365,7 @@ const Solutions = () => {
       </section>
 
       {/* Process Section */}
-      <section className="py-24 px-8 bg-foreground/5">
+      <section className="py-24 px-6 md:px-8 bg-foreground/5">
         <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -408,7 +408,7 @@ const Solutions = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 px-8">
+      <section className="py-24 px-6 md:px-8">
         <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
