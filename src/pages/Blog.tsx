@@ -38,7 +38,7 @@ const Blog = () => {
       <Navbar />
 
       {/* Hero */}
-      <section className="relative pt-32 pb-16 px-8">
+      <section className="relative pt-32 pb-16 px-6 md:px-8">
         <div className="max-w-5xl mx-auto text-center">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -59,7 +59,7 @@ const Blog = () => {
       </section>
 
       {/* Category Filter */}
-      <section className="px-8 pb-8">
+      <section className="px-6 md:px-8 pb-8">
         <div className="max-w-5xl mx-auto flex flex-wrap gap-3 justify-center">
           {categories.map((cat) => (
             <motion.button
@@ -80,7 +80,7 @@ const Blog = () => {
       </section>
 
       {/* Articles Grid */}
-      <section className="px-8 pb-24">
+      <section className="px-6 md:px-8 pb-24">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
           {filtered.map((post, index) => (
             <motion.div

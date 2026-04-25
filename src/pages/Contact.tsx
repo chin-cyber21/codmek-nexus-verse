@@ -98,7 +98,7 @@ const Contact = () => {
           }} />
         </div>
 
-        <div className="relative z-10 container mx-auto px-8 text-center">
+        <div className="relative z-10 container mx-auto px-6 md:px-8 text-center">
           <Link to="/" className="inline-flex items-center gap-2 text-foreground/60 hover:text-foreground transition-colors mb-12">
             <ArrowLeft className="w-4 h-4" />
             Back to Home
@@ -113,7 +113,7 @@ const Contact = () => {
       </section>
 
       {/* Contact Form + Info */}
-      <section className="py-24 px-8">
+      <section className="py-24 px-6 md:px-8">
         <div className="container mx-auto max-w-6xl">
           <div className="grid lg:grid-cols-5 gap-12">
             {/* Form */}
