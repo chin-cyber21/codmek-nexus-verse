@@ -161,7 +161,7 @@ const Home = () => {
           </motion.div>
           
           <motion.h1 
-            className="text-6xl md:text-8xl font-bold mb-6 holographic-text"
+            className="text-5xl sm:text-6xl md:text-8xl font-bold mb-6 holographic-text break-words"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -170,7 +170,7 @@ const Home = () => {
           </motion.h1>
           
           <motion.p 
-            className="text-2xl md:text-3xl text-foreground/80 font-light tracking-wide mb-4"
+            className="text-xl sm:text-2xl md:text-3xl text-foreground/80 font-light tracking-wide mb-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
@@ -292,9 +292,9 @@ const Home = () => {
 
                     {/* Content */}
                     <div className="relative space-y-3">
-                      <h2 className="text-2xl font-bold text-foreground group-hover:holographic-text transition-all duration-300">
+                      <h3 className="text-2xl font-bold text-foreground group-hover:holographic-text transition-all duration-300">
                         {vertical.title}
-                      </h2>
+                      </h3>
                       <p className="text-sm text-foreground/60 italic font-light">
                         {vertical.tagline}
                       </p>
