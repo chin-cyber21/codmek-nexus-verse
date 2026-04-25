@@ -256,7 +256,7 @@ const Solutions = () => {
           }} />
         </div>
 
-        <div className="relative z-10 container mx-auto px-8 text-center">
+        <div className="relative z-10 container mx-auto px-6 md:px-8 text-center">
           <Link to="/" className="inline-flex items-center gap-2 text-foreground/60 hover:text-foreground transition-colors mb-12">
             <ArrowLeft className="w-4 h-4" />
             Back to Home
@@ -300,7 +300,7 @@ const Solutions = () => {
       </section>
 
       {/* Solutions Grid */}
-      <section id="solutions-grid" className="py-24 px-8">
+      <section id="solutions-grid" className="py-24 px-6 md:px-8">
         <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -323,10 +323,19 @@ const Solutions = () => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
+                  transition={{ delay: index * 0.05 }}
                   whileHover={{ scale: 1.02 }}
                   onClick={() => handleSolutionClick(solution)}
-                  className="glass-panel p-8 rounded-xl cursor-pointer group relative overflow-hidden"
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      handleSolutionClick(solution);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Open details for ${solution.title}`}
+                  className="glass-panel p-8 rounded-xl cursor-pointer group relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   <div className={`absolute inset-0 bg-gradient-to-br ${solution.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
                   
@@ -356,7 +365,7 @@ const Solutions = () => {
       </section>
 
       {/* Process Section */}
-      <section className="py-24 px-8 bg-foreground/5">
+      <section className="py-24 px-6 md:px-8 bg-foreground/5">
         <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -399,7 +408,7 @@ const Solutions = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 px-8">
+      <section className="py-24 px-6 md:px-8">
         <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -407,7 +416,7 @@ const Solutions = () => {
             viewport={{ once: true }}
             className="glass-panel p-12 md:p-16 rounded-2xl text-center relative overflow-hidden"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-violet-500/10 to-pink-500/10 opacity-50" />
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary/5 to-primary/10 opacity-60" />
             
             <div className="relative z-10">
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
@@ -457,7 +466,7 @@ const Solutions = () => {
                   <div className="space-y-3">
                     {selectedSolution.capabilities.map((capability, idx) => (
                       <div key={idx} className="flex items-start gap-3">
-                        <CheckCircle2 className="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" />
+                        <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
                         <p className="text-foreground/70">{capability}</p>
                       </div>
                     ))}

@@ -159,7 +159,7 @@ const Nexus = () => {
               <Network className="w-20 h-20 mx-auto text-primary glow-soft" />
             </motion.div>
             
-            <h1 className="text-6xl md:text-7xl font-bold mb-6 holographic-text">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 holographic-text break-words">
               Codmek Nexus
             </h1>
             
@@ -210,9 +210,18 @@ const Nexus = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
                 onClick={() => setSelectedHub(hub.id)}
-                className="glass-panel p-8 cursor-pointer group hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 border border-border/50 hover:border-primary/60 relative overflow-hidden"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setSelectedHub(hub.id);
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+                aria-label={`Open ${hub.title} hub details`}
+                className="glass-panel p-8 cursor-pointer group hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 border border-border/50 hover:border-primary/60 relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 {/* Hover glow effect */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none" />
