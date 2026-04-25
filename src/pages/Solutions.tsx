@@ -416,7 +416,7 @@ const Solutions = () => {
             viewport={{ once: true }}
             className="glass-panel p-12 md:p-16 rounded-2xl text-center relative overflow-hidden"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-violet-500/10 to-pink-500/10 opacity-50" />
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary/5 to-primary/10 opacity-60" />
             
             <div className="relative z-10">
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
@@ -466,7 +466,7 @@ const Solutions = () => {
                   <div className="space-y-3">
                     {selectedSolution.capabilities.map((capability, idx) => (
                       <div key={idx} className="flex items-start gap-3">
-                        <CheckCircle2 className="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" />
+                        <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
                         <p className="text-foreground/70">{capability}</p>
                       </div>
                     ))}
