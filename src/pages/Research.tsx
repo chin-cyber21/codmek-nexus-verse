@@ -158,10 +158,10 @@ const Research = () => {
             transition={{ duration: 1.2, delay: 0.2 }}
             className="mb-8"
           >
-            <h1 className="text-7xl md:text-8xl font-bold mb-6 holographic-text">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 holographic-text break-words">
               Codmek Research
             </h1>
-            <p className="text-3xl md:text-4xl text-foreground/80 font-light mb-8">
+            <p className="text-2xl sm:text-3xl md:text-4xl text-foreground/80 font-light mb-8">
               Where Curiosity Meets Creation
             </p>
           </motion.div>
@@ -210,10 +210,19 @@ const Research = () => {
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
+                  transition={{ delay: index * 0.05 }}
                   whileHover={{ scale: 1.02, y: -5 }}
                   onClick={() => setSelectedDivision(division)}
-                  className="glass-panel p-8 cursor-pointer group hover:glow-soft transition-all duration-300"
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setSelectedDivision(division);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Open ${division.title} details`}
+                  className="glass-panel p-8 cursor-pointer group hover:glow-soft transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   <div className="mb-6">
                     <Icon className="w-12 h-12 text-foreground/70 group-hover:text-foreground transition-colors" />
