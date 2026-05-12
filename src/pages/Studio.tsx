@@ -6,6 +6,7 @@ import Studio3D from "@/components/Studio3D";
 import HUD from "@/components/HUD";
 import ChatModal from "@/components/ChatModal";
 import PodOverlay from "@/components/PodOverlay";
+import SEO from "@/components/SEO";
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -39,6 +40,13 @@ const Index = () => {
 
   return (
     <div className="relative w-full h-screen overflow-hidden">
+      <SEO
+        title="Codmek Studio — AI Creative Design Lab"
+        description="A creative sanctuary where design thinking and AI engineering converge. Interactive installations, immersive digital experiences, and creative AI tools."
+        path="/studio"
+        canonical="https://codmek.com/studio"
+        keywords="AI design studio, creative AI, digital experiences, AI art, interactive installations"
+      />
       <AnimatePresence>
         {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
       </AnimatePresence>

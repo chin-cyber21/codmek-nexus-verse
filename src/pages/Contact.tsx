@@ -55,10 +55,11 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEO
-        title="Contact Us"
-        description="Get in touch with Codmek Softech for AI consulting, software development, research partnerships, or business inquiries. Based in Jaipur, India — serving clients worldwide."
+        title="Contact Codmek Softech — AI Consulting & Partnerships"
+        description="Get in touch with Codmek Softech for AI consulting, software development, research partnerships, or business inquiries. Based in Jaipur, India."
         path="/contact"
-        keywords="contact Codmek, AI consulting, hire AI developers, AI company India, Jaipur software company, AI partnership, get quote AI project"
+        canonical="https://codmek.com/contact"
+        keywords="contact Codmek, AI consulting India, AI company Jaipur, hire AI developer India"
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "ContactPage",

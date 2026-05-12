@@ -81,6 +81,7 @@ const BlogPost = () => {
         title={post.title}
         description={post.excerpt}
         path={`/blog/${post.slug}`}
+        canonical={`https://codmek.com/blog/${post.slug}`}
         keywords={post.tags.join(", ")}
         jsonLd={{
           "@context": "https://schema.org",

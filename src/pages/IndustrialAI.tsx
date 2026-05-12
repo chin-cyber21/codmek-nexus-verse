@@ -183,10 +183,11 @@ const IndustrialAI = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEO
-        title="Industrial AI & Digital Transformation"
-        description="Codmek delivers Industrial AI solutions: quality inspection, predictive maintenance, digital twins, IoT edge AI, and compliance dashboards for pharma, automotive, energy & logistics."
+        title="Industrial AI Solutions — Computer Vision & Automation | Codmek"
+        description="Codmek industrial AI: computer vision quality control, predictive maintenance, process automation for manufacturing and industrial enterprises in India."
         path="/solutions/industrial-ai"
-        keywords="industrial AI, digital transformation, predictive maintenance, AI quality inspection, digital twin, edge AI, smart factory, Industry 4.0, Codmek"
+        canonical="https://codmek.com/solutions/industrial-ai"
+        keywords="industrial AI, computer vision India, predictive maintenance, manufacturing automation, quality control AI"
         jsonLd={[
           {
             "@context": "https://schema.org",
