@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { getPostBySlug } from "@/data/blogPosts";
+import { Helmet } from "react-helmet-async";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();

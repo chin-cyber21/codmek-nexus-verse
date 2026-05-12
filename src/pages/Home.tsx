@@ -10,6 +10,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FAQSection, { faqJsonLd } from "@/components/FAQSection";
 import SEO from "@/components/SEO";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   const [showContent, setShowContent] = useState(false);
