@@ -94,10 +94,11 @@ const Nexus = () => {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
       <SEO
-        title="Nexus"
-        description="Codmek Nexus — global partnership hub for open-source collaboration, academic research, government AI, and cross-domain innovation with 150+ active contributors worldwide."
+        title="Codmek Nexus — AI Partnership & Innovation Network"
+        description="Join Codmek Nexus: a global partnership platform connecting researchers, startups, and enterprises for collaborative AI innovation."
         path="/nexus"
-        keywords="AI partnerships, open source AI, academic collaboration, innovation hub, Codmek Nexus, AI community, government AI, research partnerships"
+        canonical="https://codmek.com/nexus"
+        keywords="AI partnership India, innovation network, AI collaboration, startup AI network, research partnership"
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "WebPage",

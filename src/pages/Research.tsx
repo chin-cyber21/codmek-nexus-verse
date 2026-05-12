@@ -96,10 +96,11 @@ const Research = () => {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <SEO
-        title="Research"
-        description="Codmek Research — exploring AGI architectures, neural interpretability, computational biology, autonomous robotics, graph intelligence, and 3D computer vision."
+        title="Codmek Research — AI Research & Cognitive Systems"
+        description="Cutting-edge AI research in neural systems, AGI, machine learning, and cognitive architectures. Explore Codmek's research labs and innovation initiatives."
         path="/research"
-        keywords="AI research, AGI research, neural networks, cognitive computing, autonomous agents, computer vision, computational biology, digital twins, graph neural networks, Codmek research labs, AI R&D India"
+        canonical="https://codmek.com/research"
+        keywords="AI research India, AGI, neural networks, cognitive systems, machine learning research"
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "ResearchOrganization",

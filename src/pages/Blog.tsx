@@ -18,10 +18,11 @@ const Blog = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEO
-        title="Blog"
-        description="Insights on AI research, engineering, and innovation from Codmek Softech — covering AGI, neural interpretability, computational biology, responsible AI, and more."
+        title="Codmek Blog — AI Research, Insights & Innovation"
+        description="Explore latest AI research, technical deep-dives, industry insights, and innovation stories from the Codmek Softech team."
         path="/blog"
-        keywords="AI blog, artificial intelligence articles, machine learning insights, AGI research, AI engineering, Codmek blog"
+        canonical="https://codmek.com/blog"
+        keywords="AI blog India, machine learning articles, AI research blog, artificial intelligence insights"
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "Blog",

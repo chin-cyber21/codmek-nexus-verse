@@ -73,10 +73,11 @@ const Home = () => {
   return (
     <>
       <SEO
-        title="Codmek Softech — AI Research, Innovation & Crafting Tech"
-        description="Codmek Softech is an AI-native company building intelligent solutions across research, studio, learning, enterprise solutions, and global partnerships. Headquartered in Jaipur, India."
+        title="Codmek Softech — AI Research, Innovation & Enterprise Solutions"
+        description="Codmek Softech is an AI-native company in Jaipur, India building intelligent solutions across research, studio, learning, enterprise automation, and partnerships."
         path="/"
-        keywords="Codmek, Codmek Softech, AI research company, artificial intelligence, machine learning, deep learning, AI solutions, AI startup India, Jaipur AI company, enterprise AI, AGI research, intelligent automation, AI software development"
+        canonical="https://codmek.com"
+        keywords="Codmek, AI company India, artificial intelligence Jaipur, enterprise AI, machine learning"
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "WebPage",

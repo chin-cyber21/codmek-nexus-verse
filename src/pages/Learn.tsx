@@ -218,10 +218,11 @@ const Learn = () => {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
       <SEO
-        title="Codmek Learn — AI Education Platform"
-        description="Master AI with live mentoring, peer-to-peer learning, and real-world projects. Programs for school students (Class 4-12), college students, and working professionals."
+        title="Codmek Learn — AI Education & Innovation Programs"
+        description="AI literacy programs, research mentorships, and innovation courses built for India's next generation of builders and enterprises."
         path="/learn"
-        keywords="AI courses India, live AI mentoring, coding bootcamp, machine learning course, Codmek Learn, young engineer program, AI for school students, engineering courses"
+        canonical="https://codmek.com/learn"
+        keywords="AI education India, machine learning course, AI mentorship, innovation programs, AI literacy"
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "EducationalOrganization",

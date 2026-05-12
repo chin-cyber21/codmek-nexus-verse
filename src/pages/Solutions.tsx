@@ -182,10 +182,11 @@ const Solutions = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEO
-        title="Solutions"
-        description="Enterprise AI solutions by Codmek Softech: AI/ML engineering, intelligent software, business automation, robotics, cloud infrastructure, consulting, and Research as a Service (RaaS)."
+        title="Codmek Solutions — Enterprise AI & Automation"
+        description="Production-grade enterprise AI systems, intelligent automation, computer vision, NLP, and research-as-a-service for Indian businesses and government."
         path="/solutions"
-        keywords="AI solutions, enterprise AI, AI software development, business process automation, RPA, robotics, cloud engineering, MLOps, AI consulting, Research as a Service, RaaS, Codmek services, AI company India"
+        canonical="https://codmek.com/solutions"
+        keywords="enterprise AI India, AI automation, computer vision, NLP, AI solutions, government AI"
         jsonLd={[
           {
             "@context": "https://schema.org",
