@@ -11,6 +11,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { useToast } from "@/hooks/use-toast";
+import { Helmet } from "react-helmet-async";
 
 const XIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" className={className} fill="currentColor">
@@ -85,6 +86,36 @@ const Contact = () => {
           }
         }}
       />
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "Codmek Softech",
+            "url": "https://codmek.com",
+            "logo": "https://codmek.com/og-image.png",
+            "description": "AI-native company building intelligent solutions across research, studio, learning, enterprise and global partnerships.",
+            "foundingDate": "2025",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "C-5, Green Park, Badh Chela, Jagatpura",
+              "addressLocality": "Jaipur",
+              "addressRegion": "Rajasthan",
+              "postalCode": "302017",
+              "addressCountry": "IN"
+            },
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "email": "business@codmek.com",
+              "contactType": "customer service"
+            },
+            "sameAs": [
+              "https://x.com/CodmekSoftech",
+              "https://www.linkedin.com/company/codmek-softech/"
+            ]
+          })}
+        </script>
+      </Helmet>
       <Navbar />
 
       {/* Hero */}
