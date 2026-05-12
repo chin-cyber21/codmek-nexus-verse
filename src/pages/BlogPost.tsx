@@ -93,6 +93,26 @@ const BlogPost = () => {
           "url": `https://codmek.com/blog/${post.slug}`
         }}
       />
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": post.title,
+            "description": post.excerpt,
+            "author": { "@type": "Organization", "name": post.author },
+            "datePublished": post.date,
+            "publisher": {
+              "@type": "Organization",
+              "name": "Codmek Softech",
+              "url": "https://codmek.com",
+              "logo": "https://codmek.com/og-image.png"
+            },
+            "url": `https://codmek.com/blog/${post.slug}`,
+            "image": "https://codmek.com/og-image.png"
+          })}
+        </script>
+      </Helmet>
       <Navbar />
 
       <article className="relative pt-32 pb-24 px-6">
