@@ -90,6 +90,36 @@ const Home = () => {
           }
         }}
       />
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Codmek Softech",
+            "url": "https://codmek.com",
+            "logo": "https://codmek.com/og-image.png",
+            "description": "AI-native company building intelligent solutions across research, studio, learning, enterprise and global partnerships.",
+            "foundingDate": "2025",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "C-5, Green Park, Badh Chela, Jagatpura",
+              "addressLocality": "Jaipur",
+              "addressRegion": "Rajasthan",
+              "postalCode": "302017",
+              "addressCountry": "IN"
+            },
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "email": "contact@codmek.com",
+              "contactType": "customer service"
+            },
+            "sameAs": [
+              "https://x.com/CodmekSoftech",
+              "https://www.linkedin.com/company/codmek-softech/"
+            ]
+          })}
+        </script>
+      </Helmet>
       {/* Loading Banner */}
       {!showContent && <LoadingBanner onComplete={() => setShowContent(true)} />}
       
